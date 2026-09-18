@@ -30,6 +30,7 @@ import {
   addMeasures,
   formatMeasure,
   high,
+  low,
   maxMeasure,
   mid,
   sumMeasures,
@@ -208,14 +209,38 @@ export function buildItinerary(options: BuildOptions): Itinerary {
       })
     }
 
-    for (const segment of adventure.returnVia ?? adventure.outbound) {
-      const { minutes, sourced } = segmentTiming(segment)
+    if (adventure.returnVia) {
+      // A genuinely different way home: each leg is authored for this
+      // direction, so show them as written.
+      for (const segment of adventure.returnVia) {
+        const { minutes, sourced } = segmentTiming(segment)
+        push(cursor, {
+          kind: 'drive',
+          title: `Return: ${segment.via}`,
+          detail: driveDetail(segment),
+          minutes,
+          vehicle: segment.vehicle,
+          estimated: !sourced,
+        })
+      }
+    } else {
+      // Retracing. The outbound leg names are written for the outbound
+      // direction ("US 550 north..."), so repeating them on the way home
+      // would have the plan driving north to get back to Durango. Collapse
+      // the retrace into one leg that names the roads in the order they are
+      // actually met, which is also what anyone needs on the way home.
+      const back = [...adventure.outbound].reverse()
+      const minutes = back.reduce(
+        (sum, segment) => sum + segmentTiming(segment).minutes,
+        0,
+      )
+      const sourced = back.every((segment) => segmentTiming(segment).sourced)
       push(cursor, {
         kind: 'drive',
-        title: `Return: ${segment.via}`,
-        detail: driveDetail(segment),
+        title: `Retrace to ${HOME.label}`,
+        detail: returnDetail(back),
         minutes,
-        vehicle: segment.vehicle,
+        vehicle: hardestVehicle(back.map((segment) => segment.vehicle)),
         estimated: !sourced,
       })
     }
@@ -517,8 +542,55 @@ function hikeDetail(hike: Hike, minutes: Measure): string {
     formatMeasure(hike.miles, 'mi', { decimals: 1 }),
     `${formatMeasure(hike.gainFt, 'ft')} gain`,
     `high point ${formatMeasure(hike.highPointFt, 'ft')}`,
-    `about ${formatMeasure(minutes, 'min')} moving and stopped`,
+    `about ${formatDurationRange(minutes)} moving and stopped`,
   ].join(' · ')
+}
+
+/** "6h 15m" or "6h 15m–7h 15m" — raw minutes are unreadable past an hour. */
+export function formatDurationRange(minutes: Measure): string {
+  if (minutes === null) return 'UNKNOWN'
+  const lo = low(minutes) as number
+  const hi = high(minutes) as number
+  return lo === hi
+    ? formatDuration(lo)
+    : `${formatDuration(lo)}–${formatDuration(hi)}`
+}
+
+/** The way home, named in the order the roads are actually met. */
+function returnDetail(segments: Adventure['outbound']): string {
+  const names: string[] = []
+  for (const segment of segments) {
+    const name = shortRoad(segment.via)
+    // Two legs of the same highway read as one road on the way home.
+    if (names[names.length - 1] !== name) names.push(name)
+  }
+  const miles = sumMeasures(segments.map((s) => s.miles))
+  const distance =
+    miles.value === null
+      ? 'distance UNKNOWN'
+      : `${formatMeasure(miles.value, 'mi', { decimals: 1 })}${miles.missing > 0 ? '+' : ''}`
+  return `Back the way you came: ${names.join(', then ')} \u00b7 ${distance}`
+}
+
+/**
+ * Reduces an outbound leg name to the road itself.
+ *
+ * Two things matter here. The stored names are written for the drive out
+ * ("US 550 north over Coal Bank"), and a compass bearing that is correct
+ * outbound is wrong on the way home, so bearings are dropped rather than
+ * reversed -- naming the road is enough. And a leg named "US 550 north 2 mi
+ * from Silverton, then FR 585" is really the FR 585 leg, so the LAST road
+ * designator wins, not the first.
+ */
+export function shortRoad(via: string): string {
+  const routes = via.match(/\b(?:US|CO|CR|FR|FDR|I)[\s-]?\d+[A-Z]?\b/g)
+  if (routes) return routes[routes.length - 1]
+
+  const road = via.split(/,| to | toward | over | up | along /)[0]
+  return road
+    .replace(/\b(north|south|east|west|up|down)(bound)?\b/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
 }
 
 function foodDetail(food: FoodStop): string {

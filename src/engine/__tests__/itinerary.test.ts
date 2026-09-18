@@ -3,7 +3,7 @@ import { ADVENTURES_BY_ID } from '../../data/adventures'
 import { DEFAULT_PROFILE, defaultConstraints } from '../../data/profile'
 import { FOOD_BY_ID } from '../../data/food'
 import type { PlanConstraints } from '../../data/types'
-import { buildItinerary } from '../itinerary'
+import { buildItinerary, shortRoad } from '../itinerary'
 import { formatClock } from '../time'
 
 const SUMMER = '2026-07-15'
@@ -137,6 +137,99 @@ describe('return-home calculation', () => {
     expect(plan.warnings.some((w) => w.message.includes('past midnight'))).toBe(
       true,
     )
+  })
+})
+
+describe('the way home', () => {
+  it('collapses a retraced return into one leg', () => {
+    const plan = buildItinerary({
+      adventure: ADVENTURES_BY_ID.ice_lake_basin_day,
+      constraints: constraints(),
+      profile: DEFAULT_PROFILE,
+    })
+    const drives = plan.legs.filter((l) => l.kind === 'drive')
+    // Two legs out, one collapsed leg back.
+    expect(drives).toHaveLength(ADVENTURES_BY_ID.ice_lake_basin_day.outbound.length + 1)
+    expect(drives[drives.length - 1].title).toContain('Retrace')
+  })
+
+  it('never describes the drive home using the outbound direction', () => {
+    for (const adventure of Object.values(ADVENTURES_BY_ID)) {
+      const plan = buildItinerary({
+        adventure,
+        constraints: constraints(),
+        profile: DEFAULT_PROFILE,
+      })
+      const drives = plan.legs.filter((l) => l.kind === 'drive')
+      const homeward = drives[drives.length - 1]
+      if (!homeward.title.startsWith('Retrace')) continue
+      // "US 550 north" on the way back to Durango would be driving away.
+      expect(homeward.detail, adventure.id).not.toMatch(/\bnorth\b|\bwest\b|\beast\b/)
+    }
+  })
+
+  it('names the roads home in the order they are actually met', () => {
+    const plan = buildItinerary({
+      adventure: ADVENTURES_BY_ID.ice_lake_basin_day,
+      constraints: constraints(),
+      profile: DEFAULT_PROFILE,
+    })
+    const homeward = plan.legs.filter((l) => l.kind === 'drive').pop()!
+    // Leaving the trailhead you are on FR 585 before you are on US 550.
+    expect(homeward.detail.indexOf('FR 585')).toBeLessThan(
+      homeward.detail.indexOf('US 550'),
+    )
+  })
+
+  it('takes as long to get back as it did to get there when retracing', () => {
+    const adventure = ADVENTURES_BY_ID.engineer_mountain_day
+    const plan = buildItinerary({
+      adventure,
+      constraints: constraints(),
+      profile: DEFAULT_PROFILE,
+    })
+    const drives = plan.legs
+      .filter((l) => l.kind === 'drive')
+      .map((l) => l.endMinutes - l.startMinutes)
+    const out = drives.slice(0, adventure.outbound.length).reduce((a, b) => a + b, 0)
+    expect(drives[drives.length - 1]).toBe(out)
+  })
+})
+
+describe('naming the roads home', () => {
+  it('takes the road that defines the leg, not the one mentioned first', () => {
+    expect(
+      shortRoad('US 550 north 2 mi from Silverton, then FR 585 (South Mineral Rd)'),
+    ).toBe('FR 585')
+    expect(shortRoad('CR 124 / FR 571 up La Plata Canyon')).toBe('FR 571')
+    expect(shortRoad('US 160 east, then CO 151 south')).toBe('CO 151')
+  })
+
+  it('drops a bearing that would be wrong on the way back', () => {
+    expect(shortRoad('US 550 north over Coal Bank')).toBe('US 550')
+    expect(shortRoad('Ophir Pass road west over the summit toward Ophir')).toBe(
+      'Ophir Pass road',
+    )
+  })
+
+  it('falls back to the road name when there is no route number', () => {
+    expect(shortRoad('Park entrance road to Chapin Mesa')).toBe(
+      'Park entrance road',
+    )
+    expect(shortRoad('City streets to the W 4th Ave trailhead')).toBe(
+      'City streets',
+    )
+  })
+
+  it('keeps every distinct road on the way home', () => {
+    const plan = buildItinerary({
+      adventure: ADVENTURES_BY_ID.ice_lake_basin_day,
+      constraints: constraints(),
+      profile: DEFAULT_PROFILE,
+    })
+    const homeward = plan.legs.filter((l) => l.kind === 'drive').pop()!
+    expect(homeward.detail).toContain('FR 585')
+    expect(homeward.detail).toContain('US 550')
   })
 })
 

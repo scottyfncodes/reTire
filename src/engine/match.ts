@@ -109,7 +109,9 @@ export function scoreAdventures(input: MatchInput): ScoredAdventure[] {
       blockers.push('Longer drive than you asked for')
     } else {
       score += 8
-      if (driveMinutes <= driveLimit * 0.6) reasons.push('Short drive')
+      if (driveMinutes <= driveLimit * 0.6) {
+        reasons.push('Well inside your driving limit')
+      }
     }
 
     const hike = adventure.hikeIds
