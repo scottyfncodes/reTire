@@ -483,14 +483,14 @@ function pickFood(
   if (explicit === null) return null
   if (explicit) {
     const chosen = FOOD_BY_ID[explicit]
-    return chosen && chosen.closed === null ? chosen : null
+    return chosen && chosen.status === 'active' ? chosen : null
   }
   if (constraints.food === 'none') return null
 
   const candidates = adventure.foodIds
     .map((id) => FOOD_BY_ID[id])
-    // A place we know has closed never gets recommended, whatever the mode.
-    .filter((f): f is FoodStop => Boolean(f) && f.closed === null)
+    // Only a confirmed-operating business is ever recommended, whatever the mode.
+    .filter((f): f is FoodStop => Boolean(f) && f.status === 'active')
 
   if (constraints.food === 'brewery') {
     const beer = candidates.find(

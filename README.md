@@ -34,10 +34,13 @@ The same rule runs through the rest of the app:
   the numbers rather than buried in a footer.
 - **Brewery hours are not stored as fact.** They change constantly and a stale
   hour is a wasted drive, so they are a labelled note with a check date and a
-  phone number. A business known to have closed stays in the dataset with a
-  closure reason so the recommender can never resurrect it. (Avalanche Brewing
-  in Silverton is the live example — it is the obvious beer stop on half these
-  routes, and it shut in 2025.)
+  phone number. Every business carries an explicit `status`
+  (`active`/`seasonal`/`temporarily_closed`/`permanently_closed`/`unknown`),
+  and only `active` businesses are ever offered as a recommendation — a
+  general rule, not a one-off special case. (Avalanche Brewing in Silverton is
+  the example that motivated it — it was the obvious beer stop on half these
+  routes, shut in 2025, and stays in the dataset as `permanently_closed` so
+  the recommender can never resurrect it.)
 - **Unmeasured road legs are counted and reported.** If a leg has no sourced
   distance, the totals are labelled floors rather than being quietly
   under-reported.
@@ -58,6 +61,20 @@ The same rule runs through the rest of the app:
 Plus a **day-trip builder** that returns three genuinely different shapes of
 day — historic high country, a Bronco day, and a big-legs day — rather than
 three variations on one.
+
+## 🚙 Bronco
+
+A dedicated tab covers the Bronco Sasquatch as a field companion, not an
+owner's-manual dump: a quick-reference dashboard (ground clearance, approach/
+departure/breakover angle, water fording, tire size, fuel capacity), G.O.A.T.
+Modes explained in plain language, an off-road cheat sheet, tire and recovery
+guidance, a roof-tent checklist, and an interactive pre-adventure checklist.
+Every figure is Ford's own, cited in `src/data/bronco.ts`; anything that
+varies by body style, trim or engine says so instead of picking one number.
+Every adventure's detail page carries a **Bronco check** built from the
+route's own sourced data — vehicle capability is compared against the
+route's stated requirement, but current road condition is always a separate
+"VERIFY" call, never something this app asserts on the vehicle's behalf.
 
 Adventures are described by **depth** (Quick Outing → Expedition) rather than a
 beginner/advanced label, with the actual numbers alongside. The label
@@ -96,10 +113,12 @@ Durations are a **disclosed model**, and the UI marks them `est.`:
 
 USFS (San Juan National Forest), BLM, National Park Service, CDOT / COtrip,
 Recreation.gov, San Juan Mountains Association, Durango Trails, county road
-information, the businesses' own sites, and — clearly labelled as such —
-community trail data where nothing official publishes a figure. Weather comes
-from [Open-Meteo](https://open-meteo.com/), elevation-corrected so a forecast
-for a 12,000 ft basin is not silently the forecast for the valley floor.
+information, the businesses' own sites and area tourism/chamber listings, Ford
+(for the Bronco Sasquatch specifications), and — clearly labelled as such —
+community trail and owner-forum data where nothing official publishes a
+figure. Weather comes from [Open-Meteo](https://open-meteo.com/),
+elevation-corrected so a forecast for a 12,000 ft basin is not silently the
+forecast for the valley floor.
 
 Sources are listed in `src/data/sources.ts` and a test asserts that every
 record cites one that exists.
@@ -109,14 +128,15 @@ record cites one that exists.
 ```bash
 npm install
 npm run dev      # local dev server
-npm test         # 167 tests
+npm test         # 195 tests
 npm run build    # production build to dist/
 ```
 
 Tests cover itinerary generation, time arithmetic, drive and hike durations,
 return-home calculations, filtering, weather parsing, route requirements,
-camping constraints, food integration, saved adventures, offline state,
-malformed and missing data, and dataset integrity.
+camping constraints, food integration, business status/recommendation rules,
+Bronco data provenance and route-context logic, saved adventures, offline
+state, malformed and missing data, and dataset integrity.
 
 ## Deployment
 

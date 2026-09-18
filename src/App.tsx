@@ -7,10 +7,12 @@ import { Builder } from './screens/Builder'
 import { Trips } from './screens/Trips'
 import { LogScreen } from './screens/LogScreen'
 import { ProfileScreen } from './screens/ProfileScreen'
+import { Bronco } from './screens/Bronco'
 import { useStore } from './state/store'
 
 const TABS = [
   { path: '', glyph: '🏔️', label: 'Today', match: ['home', 'mode', 'adventure'] },
+  { path: 'bronco', glyph: '🚙', label: 'Bronco', match: ['bronco'] },
   { path: 'builder', glyph: '🗺️', label: 'Build', match: ['builder'] },
   { path: 'trips', glyph: '📌', label: 'Saved', match: ['trips', 'trip'] },
   { path: 'log', glyph: '📓', label: 'Log', match: ['log'] },
@@ -49,6 +51,9 @@ function Screens() {
       break
     case 'profile':
       screen = <ProfileScreen go={go} />
+      break
+    case 'bronco':
+      screen = <Bronco go={go} />
       break
     default:
       screen = <Home go={go} />

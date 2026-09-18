@@ -69,6 +69,20 @@ export function Home({ go }: { go: (path: string) => void }) {
           : `${log.length} adventure${log.length === 1 ? '' : 's'} logged so far. Next.`}
       </p>
 
+      <button
+        type="button"
+        className="card card--tap"
+        style={{ borderColor: 'var(--ink-500)' }}
+        onClick={() => go('bronco')}
+      >
+        <div className="chips" style={{ marginBottom: 8 }}>
+          <span className="chip chip--truck">🚙 BRONCO</span>
+        </div>
+        <p className="tiny muted" style={{ margin: 0 }}>
+          Know the rig. Then go find somewhere ridiculous to drive it.
+        </p>
+      </button>
+
       <div className="mode-grid">
         {MODE_ORDER.map((mode) => (
           <button
