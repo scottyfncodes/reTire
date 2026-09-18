@@ -124,6 +124,16 @@ Pushed to GitHub Pages by `.github/workflows/deploy.yml`. The deploy is gated
 on the tests, not just on the build succeeding — a plan that is confidently
 wrong about when you get home is worse than no plan.
 
+The repository's `github-pages` environment carries a deployment branch policy
+naming `main`, and the Pages source is `main`, so the publishing branch has to
+be `main`. A deployment from any other branch is rejected before a runner picks
+it up, which shows as a `deploy` job that fails in about two seconds with no
+logs at all. If that happens, the branch policy is the thing to look at:
+
+```
+gh api repos/OWNER/REPO/environments/github-pages/deployment-branch-policies
+```
+
 ## Offline
 
 A saved adventure keeps its full itinerary, coordinates, route summary, road

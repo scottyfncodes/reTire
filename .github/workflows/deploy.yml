@@ -43,21 +43,6 @@ jobs:
         with:
           path: dist
 
-      # Diagnostic: the deploy job is being rejected before a runner picks it
-      # up, which produces no logs. Print what the API actually says about the
-      # Pages site and the github-pages environment.
-      - name: Report Pages configuration
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "--- repo ---"
-          gh api "repos/$GITHUB_REPOSITORY" --jq '{default_branch, has_pages, visibility}' || true
-          echo "--- pages ---"
-          gh api "repos/$GITHUB_REPOSITORY/pages" || true
-          echo "--- environment ---"
-          gh api "repos/$GITHUB_REPOSITORY/environments/github-pages" || true
-          echo "--- branch policies ---"
-          gh api "repos/$GITHUB_REPOSITORY/environments/github-pages/deployment-branch-policies" || true
 
   deploy:
     needs: build
