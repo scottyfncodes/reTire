@@ -4,7 +4,7 @@ import { CAMPS_BY_ID } from '../data/camps'
 import { FOOD_BY_ID } from '../data/food'
 import { HIKES_BY_ID } from '../data/hikes'
 import { STOPS_BY_ID } from '../data/stops'
-import type { Itinerary } from '../data/types'
+import type { Adventure, Itinerary } from '../data/types'
 import { buildItinerary, formatDurationRange } from '../engine/itinerary'
 import { estimateHike } from '../engine/hike'
 import { DEPTH_BLURB, DEPTH_LABEL } from '../engine/depth'
@@ -13,6 +13,7 @@ import { formatMeasure, high } from '../engine/measure'
 import { formatClock, formatDuration } from '../engine/time'
 import { formatSeasonMonths } from '../engine/season'
 import { measureToLogged } from '../engine/log'
+import { broncoRouteContext } from '../engine/bronco'
 import { newTripId, offlineCapability, type SavedTrip } from '../services/trips'
 import { useStore } from '../state/store'
 import { useWeather } from '../state/useWeather'
@@ -220,7 +221,7 @@ export function Detail({
               options={[
                 { value: null, label: 'Skip it' },
                 ...adventure.foodIds
-                  .filter((f) => FOOD_BY_ID[f].closed === null)
+                  .filter((f) => FOOD_BY_ID[f].status === 'active')
                   .map((f) => ({ value: f, label: FOOD_BY_ID[f].name })),
               ]}
               onChange={setFoodId}
@@ -249,6 +250,9 @@ export function Detail({
           )}
         </div>
       )}
+
+      <SectionTitle>🚙 Bronco check</SectionTitle>
+      <BroncoCheck adventure={adventure} itinerary={itinerary} go={go} />
 
       <SectionTitle>Weather at the destination</SectionTitle>
       <WeatherPanel
@@ -550,6 +554,72 @@ export function Detail({
           prefix="Adventure sources"
         />
       </div>
+    </div>
+  )
+}
+
+function BroncoCheck({
+  adventure,
+  itinerary,
+  go,
+}: {
+  adventure: Adventure
+  itinerary: Itinerary
+  go: (path: string) => void
+}) {
+  const ctx = broncoRouteContext(adventure, itinerary)
+  return (
+    <div className="card card--flat">
+      <div className="chips" style={{ marginBottom: 10 }}>
+        <span className="chip chip--truck">Vehicle: Bronco Sasquatch</span>
+        <span className={ctx.highClearanceRelevant ? 'chip chip--truck' : 'chip'}>
+          High clearance: {ctx.highClearanceRelevant ? 'Relevant' : 'Not required'}
+        </span>
+        <span className={ctx.fourWdRelevant ? 'chip chip--truck' : 'chip'}>
+          4WD: {ctx.fourWdRelevant ? 'Relevant' : 'Not required'}
+        </span>
+      </div>
+      <Line label="Road difficulty" value={ctx.roadClasses.join(', ')} />
+      <Line label="Stated requirement" value={ctx.requirementLabel} />
+      <Line
+        label="Bronco Sasquatch capability vs. stated requirement"
+        value={
+          ctx.meetsStatedRequirement === null
+            ? 'UNKNOWN — the route requirement itself is not established'
+            : ctx.meetsStatedRequirement
+              ? 'Meets or exceeds the stated requirement'
+              : 'Falls short of the stated requirement'
+        }
+      />
+      {ctx.considerations.length > 0 && (
+        <>
+          <div className="eyebrow" style={{ marginTop: 10 }}>
+            Vehicle considerations
+          </div>
+          <ul className="tiny muted" style={{ paddingLeft: 18 }}>
+            {ctx.considerations.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+        </>
+      )}
+      <div className="warn warn--caution" style={{ marginTop: 10 }}>
+        <span className="warn__mark">!</span>
+        <span>
+          Vehicle suitability: VERIFY. A capable vehicle does not make a
+          closed, washed-out or snowed-in road passable — check current
+          conditions before you go. Vehicle capability and current road
+          condition are different questions.
+        </span>
+      </div>
+      <button
+        type="button"
+        className="btn btn--ghost"
+        style={{ marginTop: 10 }}
+        onClick={() => go('bronco')}
+      >
+        Open the Bronco companion
+      </button>
     </div>
   )
 }

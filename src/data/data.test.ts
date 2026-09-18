@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { ADVENTURES } from './adventures'
 import { CAMPS, CAMPS_BY_ID } from './camps'
-import { FOOD, FOOD_BY_ID } from './food'
+import { FOOD, FOOD_BY_ID, OPEN_FOOD } from './food'
 import { HIKES, HIKES_BY_ID } from './hikes'
 import { SOURCES, trustOf } from './sources'
 import { STOPS, STOPS_BY_ID } from './stops'
@@ -90,11 +90,11 @@ describe('referential integrity', () => {
     expect(unique(STOPS.map((s) => s.id))).toBe(true)
   })
 
-  it('never offers a closed business as an adventure’s only food option', () => {
+  it('never offers a non-active business as an adventure’s only food option', () => {
     for (const adventure of ADVENTURES) {
       if (adventure.foodIds.length === 0) continue
-      const open = adventure.foodIds.filter((id) => FOOD_BY_ID[id].closed === null)
-      expect(open.length, `${adventure.id} has no open food option`).toBeGreaterThan(
+      const open = adventure.foodIds.filter((id) => FOOD_BY_ID[id].status === 'active')
+      expect(open.length, `${adventure.id} has no active food option`).toBeGreaterThan(
         0,
       )
     }
@@ -160,15 +160,19 @@ describe('measurement sanity', () => {
 })
 
 describe('honesty rules', () => {
-  it('records a closure reason for anything marked closed', () => {
+  it('records a closure reason for anything not active', () => {
     for (const food of FOOD) {
-      if (food.closed !== null) expect(food.closed.length).toBeGreaterThan(0)
+      if (food.status === 'active') continue
+      expect(
+        food.closureReason !== null && food.closureReason.length > 0,
+        `${food.id} is ${food.status} but has no closureReason`,
+      ).toBe(true)
     }
   })
 
   it('does not present unverified hours as fact', () => {
     for (const food of FOOD) {
-      if (food.closed !== null) continue
+      if (food.status !== 'active') continue
       expect(
         food.hoursNote === null ||
           /not verified|confirm|call ahead|checked/i.test(food.hoursNote),
@@ -192,6 +196,49 @@ describe('honesty rules', () => {
         camp.restrictions.join(' ').toLowerCase(),
         `${camp.id} does not defer to the land manager`,
       ).toMatch(/sign|verify|check|do not assume/)
+    }
+  })
+})
+
+describe('business status model', () => {
+  const STATUSES = ['active', 'seasonal', 'temporarily_closed', 'permanently_closed', 'unknown']
+
+  it('gives every business one of the explicit statuses', () => {
+    for (const food of FOOD) {
+      expect(STATUSES, food.id).toContain(food.status)
+    }
+  })
+
+  it('only ACTIVE businesses can ever be recommended', () => {
+    expect(OPEN_FOOD.length).toBeGreaterThan(0)
+    for (const food of OPEN_FOOD) {
+      expect(food.status, food.id).toBe('active')
+    }
+  })
+
+  it('excludes SEASONAL, TEMPORARILY_CLOSED, PERMANENTLY_CLOSED and UNKNOWN from OPEN_FOOD', () => {
+    for (const food of FOOD) {
+      if (food.status === 'active') continue
+      expect(
+        OPEN_FOOD.some((f) => f.id === food.id),
+        `${food.id} is ${food.status} but appears in OPEN_FOOD`,
+      ).toBe(false)
+    }
+  })
+
+  it('keeps Avalanche Brewing permanently closed and unrecommendable, generically -- not as a special case', () => {
+    const avalanche = FOOD_BY_ID['avalanche_silverton']
+    expect(avalanche.status).toBe('permanently_closed')
+    expect(avalanche.closureReason).not.toBeNull()
+    expect(OPEN_FOOD.some((f) => f.id === 'avalanche_silverton')).toBe(false)
+  })
+
+  it('carries a verification source and a verification date for every business', () => {
+    for (const food of FOOD) {
+      expect(food.sources.length, `${food.id} has no verification source`).toBeGreaterThan(0)
+      expect(food.lastChecked, `${food.id} has no verification date`).toMatch(
+        /^\d{4}-\d{2}-\d{2}$/,
+      )
     }
   })
 })
