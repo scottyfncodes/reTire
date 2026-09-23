@@ -1,5 +1,5 @@
 /**
- * Domain types for reTire.
+ * Domain types for RayTire.
  *
  * Design rule that outranks everything else in here: the model must be able to
  * say "I don't know". Every physical measurement is a `Measure`, which is

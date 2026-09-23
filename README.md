@@ -1,4 +1,4 @@
-# reTire
+# RayTire
 
 **Retirement, with a lot more altitude.**
 
@@ -109,7 +109,7 @@ record cites one that exists.
 ```bash
 npm install
 npm run dev      # local dev server
-npm test         # 167 tests
+npm test         # 170 tests
 npm run build    # production build to dist/
 ```
 
@@ -141,3 +141,7 @@ requirements, hike and campsite detail, hazards and packing list with no
 signal. Live weather, current closures, navigation and brewery hours need the
 network, and the app names exactly which is which rather than showing stale
 data as current.
+
+The app was renamed from reTire to RayTire. Data saved under the old
+`retire.v1.` storage prefix is moved to `raytire.v1.` on first launch, so an
+installed copy keeps its trips, log and profile across the rename.
