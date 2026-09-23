@@ -26,7 +26,7 @@ export function Home({ go }: { go: (path: string) => void }) {
     <div>
       <header className="masthead">
         <div className="wordmark">
-          re<em>Tire</em>
+          Ray<em>Tire</em>
         </div>
         <div className="tagline">Retirement, with a lot more altitude.</div>
       </header>
