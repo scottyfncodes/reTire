@@ -9,6 +9,7 @@ export type Route =
   | { name: 'trip'; id: string }
   | { name: 'log' }
   | { name: 'profile' }
+  | { name: 'bronco' }
 
 function parse(hash: string): Route {
   const path = hash.replace(/^#\/?/, '')
@@ -28,6 +29,8 @@ function parse(hash: string): Route {
       return { name: 'log' }
     case 'profile':
       return { name: 'profile' }
+    case 'bronco':
+      return { name: 'bronco' }
     default:
       return { name: 'home' }
   }
