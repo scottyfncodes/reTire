@@ -1,5 +1,5 @@
 /*
- * reTire service worker.
+ * RayTire service worker.
  *
  * The rule that shapes this file: a saved adventure has to open on a forest
  * road with no bars, and nothing may ever be served as current when it is not.
@@ -8,7 +8,7 @@
  * to its own stored forecast and label it as stale.
  */
 
-const VERSION = 'retire-v1'
+const VERSION = 'raytire-v1'
 const SHELL = `${VERSION}-shell`
 const ASSETS = `${VERSION}-assets`
 

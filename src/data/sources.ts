@@ -208,6 +208,34 @@ export const SOURCES: Record<string, Source> = {
     url: 'https://dfpc.colorado.gov/fire-restrictions-and-bans',
     kind: 'agency',
   },
+  visit_durango: {
+    id: 'visit_durango',
+    label: 'Visit Durango business listings',
+    org: 'Durango Area Tourism Office',
+    url: 'https://www.durango.org/',
+    kind: 'operator',
+  },
+  pagosa_chamber: {
+    id: 'pagosa_chamber',
+    label: 'Pagosa Springs Area Chamber of Commerce directory',
+    org: 'Pagosa Springs Area Chamber of Commerce',
+    url: 'https://pagosachamber.com/',
+    kind: 'operator',
+  },
+  ford_bronco: {
+    id: 'ford_bronco',
+    label: "Ford Bronco specifications & owner's manual",
+    org: 'Ford Motor Company',
+    url: 'https://www.ford.com/suvs/bronco/',
+    kind: 'operator',
+  },
+  bronco6g: {
+    id: 'bronco6g',
+    label: 'Bronco6G owner community',
+    org: 'Bronco6G forum',
+    url: 'https://www.bronco6g.com/',
+    kind: 'community',
+  },
 
   /* ------------------------------------------------------------- Utah */
 

@@ -19,8 +19,10 @@ export const DEFAULT_PROFILE: ExperienceProfile = {
   preferredDepth: ['half_day', 'full_day', 'big_day'],
   paceMph: 2.2,
   financeMode: true,
-  // The rig this app was built around. Editable in Profile: any vehicle works.
-  rig: { name: 'Ford Bronco', rigClass: 'four_wd' },
+  // The rig this app was built around: a Sasquatch-package Bronco, which Ford
+  // equips with front and rear lockers and ~35 in tires (see data/bronco.ts).
+  // Editable in Profile -- any vehicle works.
+  rig: { name: 'Ford Bronco Sasquatch', rigClass: 'advanced_4wd' },
 }
 
 export function defaultConstraints(isoDate: string): PlanConstraints {

@@ -1,7 +1,8 @@
 {
-  "name": "reTire — Retirement, with a lot more altitude.",
-  "short_name": "reTire",
+  "name": "RayTire — Retirement, with a lot more altitude.",
+  "short_name": "RayTire",
   "description": "Adventure planning from Durango, Colorado. Drive, explore, hike, refuel, camp.",
+  "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

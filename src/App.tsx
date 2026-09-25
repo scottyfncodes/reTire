@@ -9,10 +9,12 @@ import { LogScreen } from './screens/LogScreen'
 import { ProfileScreen } from './screens/ProfileScreen'
 import { RegionScreen } from './screens/Region'
 import { DestinationScreen } from './screens/Destination'
+import { Bronco } from './screens/Bronco'
 import { useStore } from './state/store'
 
 const TABS = [
   { path: '', glyph: '🏔️', label: 'Today', match: ['home', 'mode', 'adventure', 'region', 'destination'] },
+  { path: 'bronco', glyph: '🚙', label: 'Bronco', match: ['bronco'] },
   { path: 'builder', glyph: '🗺️', label: 'Build', match: ['builder'] },
   { path: 'trips', glyph: '📌', label: 'Saved', match: ['trips', 'trip'] },
   { path: 'log', glyph: '📓', label: 'Log', match: ['log'] },
@@ -57,6 +59,9 @@ function Screens() {
       break
     case 'destination':
       screen = <DestinationScreen id={route.id} go={go} />
+      break
+    case 'bronco':
+      screen = <Bronco go={go} />
       break
     default:
       screen = <Home go={go} />

@@ -30,7 +30,7 @@ export function Home({ go }: { go: (path: string) => void }) {
     <div>
       <header className="masthead">
         <div className="wordmark">
-          re<em>Tire</em>
+          Ray<em>Tire</em>
         </div>
         <div className="tagline">Retirement, with a lot more altitude.</div>
       </header>
@@ -74,6 +74,20 @@ export function Home({ go }: { go: (path: string) => void }) {
           ? 'Your calendar is empty. Your Bronco isn’t.'
           : `${log.length} adventure${log.length === 1 ? '' : 's'} logged so far. Next.`}
       </p>
+
+      <button
+        type="button"
+        className="card card--tap"
+        style={{ borderColor: 'var(--ink-500)' }}
+        onClick={() => go('bronco')}
+      >
+        <div className="chips" style={{ marginBottom: 8 }}>
+          <span className="chip chip--truck">🚙 BRONCO</span>
+        </div>
+        <p className="tiny muted" style={{ margin: 0 }}>
+          Know the rig. Then go find somewhere ridiculous to drive it.
+        </p>
+      </button>
 
       <div className="mode-grid">
         {MODE_ORDER.map((mode) => (

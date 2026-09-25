@@ -120,6 +120,14 @@ describe('rigVerdict', () => {
     expect(v.message).toContain('Your rig')
   })
 
+  it('reminds a capable rig that advanced routes are about the driver too', () => {
+    const sasquatch: RigProfile = { name: 'Ford Bronco Sasquatch', rigClass: 'advanced_4wd' }
+    const v = rigVerdict(sasquatch, route('advanced', 'advanced_4wd'))
+    expect(v.fit).toBe('meets')
+    expect(v.message).toMatch(/experienced drivers/)
+    expect(rigVerdict(sasquatch, route('beginner', 'high_clearance')).message).not.toMatch(/experienced/)
+  })
+
   it('offers every vehicle class in the profile picker, easiest first', () => {
     expect(RIG_CHOICES.map((c) => c.value)).toEqual([
       'standard_suv',

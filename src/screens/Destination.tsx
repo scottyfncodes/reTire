@@ -160,9 +160,24 @@ export function DestinationScreen({ id, go }: { id: string; go: (path: string) =
             {destination.routes.length} routes here.
           </span>
         </p>
-        <button type="button" className="btn btn--ghost" onClick={() => go('profile')}>
-          Change vehicle
-        </button>
+        <div className="btn-row">
+          <button type="button" className="btn btn--ghost" onClick={() => go('profile')}>
+            Change vehicle
+          </button>
+          {/bronco/i.test(rig.name) ? (
+            <button type="button" className="btn btn--ghost" onClick={() => go('bronco')}>
+              🚙 Bronco tab
+            </button>
+          ) : (
+            <span />
+          )}
+        </div>
+        {/bronco/i.test(rig.name) && (
+          <p className="tiny faint" style={{ margin: '8px 0 0' }}>
+            G.O.A.T. modes, tire pressures and recovery gear for this truck
+            live on the Bronco tab.
+          </p>
+        )}
       </div>
 
       <SectionTitle>Camping</SectionTitle>

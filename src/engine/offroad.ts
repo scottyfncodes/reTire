@@ -123,7 +123,7 @@ export const RIG_LABEL: Record<RigClass, string> = {
   standard_suv: 'Standard SUV (dry conditions)',
   high_clearance: 'High clearance recommended',
   four_wd: '4WD with low range recommended',
-  advanced_4wd: 'Advanced 4WD: lockers, bigger tires, experience',
+  advanced_4wd: 'Advanced 4WD: lockers, bigger tires, an experienced driver',
   specialized: 'Specialized: OHV rules, flags or width limits apply',
   unknown: 'Vehicle requirement UNKNOWN',
 }
@@ -143,7 +143,7 @@ export const RIG_CHOICES: Array<{ value: RigProfile['rigClass']; label: string; 
   { value: 'standard_suv', label: 'Standard SUV / AWD', help: 'Car-like clearance, no low range.' },
   { value: 'high_clearance', label: 'High clearance', help: 'Truck or SUV clearance, 2WD or AWD.' },
   { value: 'four_wd', label: '4WD + low range', help: 'Stock 4x4 with a transfer case.' },
-  { value: 'advanced_4wd', label: 'Built 4x4', help: 'Lockers, bigger tires, recovery gear.' },
+  { value: 'advanced_4wd', label: 'Lockers + big tires', help: 'Locking diffs and 33 in+ tires, factory (e.g. Bronco Sasquatch) or built.' },
   { value: 'specialized', label: 'OHV / side-by-side', help: 'ATV or UTV, flagged and registered.' },
 ]
 
@@ -188,9 +188,13 @@ export function rigVerdict(rig: RigProfile, route: OffroadRoute): RigVerdict {
   const need = RIG_RANK[route.rig]
   const have = RIG_RANK[rig.rigClass]
   if (have >= need) {
+    const driver =
+      route.rating === 'advanced'
+        ? ' Hardware is only half of it: this is rated for experienced drivers, so go first with someone who has driven it.'
+        : ''
     return {
       fit: 'meets',
-      message: `The ${name} meets the minimum vehicle class listed. That is not the same as safe -- conditions and the driver decide the rest.`,
+      message: `The ${name} meets the minimum vehicle class listed. That is not the same as safe -- conditions and the driver decide the rest.${driver}`,
     }
   }
   return {

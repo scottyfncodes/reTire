@@ -11,6 +11,7 @@ export type Route =
   | { name: 'profile' }
   | { name: 'region'; id: string }
   | { name: 'destination'; id: string }
+  | { name: 'bronco' }
 
 export function parse(hash: string): Route {
   const path = hash.replace(/^#\/?/, '')
@@ -35,6 +36,8 @@ export function parse(hash: string): Route {
       return tail && tail !== 'colorado' ? { name: 'region', id: tail } : { name: 'home' }
     case 'dest':
       return tail ? { name: 'destination', id: tail } : { name: 'home' }
+    case 'bronco':
+      return { name: 'bronco' }
     default:
       return { name: 'home' }
   }

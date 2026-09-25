@@ -185,7 +185,7 @@ describe('Moab: Bronco school to next adventure', () => {
     await mountAt('#/dest/moab')
     expect(text()).toContain('Bronco Off-Roadeo → next adventure')
     expect(text()).toContain('You learned the basics.')
-    expect(text()).toContain('Now where do you want to take the Ford Bronco?')
+    expect(text()).toContain('Now where do you want to take the Ford Bronco Sasquatch?')
     expect(text()).toContain('not a qualification')
     const steps = [...container.querySelectorAll('.ladder__title')].map((h) => h.textContent)
     expect(steps).toEqual(['Start here', 'Build confidence', 'Bring your A-game'])
@@ -200,8 +200,11 @@ describe('Moab: Bronco school to next adventure', () => {
     expect(head?.getAttribute('aria-expanded')).toBe('true')
     expect(text()).toContain('6 of 10')
     expect(text()).toContain('Grand County')
-    // Stock 4WD Bronco vs. an advanced route: flagged, never "safe".
-    expect(text()).toContain('beyond the Ford Bronco')
+    // Sasquatch hardware meets the class, but the verdict never says "safe"
+    // and puts the driver's experience front and centre.
+    expect(text()).toContain('meets the minimum vehicle class')
+    expect(text()).toContain('not the same as safe')
+    expect(text()).toContain('experienced drivers')
     const hrefs = [...container.querySelectorAll('a')].map((a) => a.getAttribute('href') ?? '')
     expect(hrefs).toContain('https://www.blm.gov/visit/hells-revenge-trailhead')
     expect(hrefs.some((h) => h.startsWith('https://www.google.com/maps/search/'))).toBe(true)
@@ -229,7 +232,7 @@ describe('Moab: Bronco school to next adventure', () => {
 describe('vehicle is a profile setting, not a Bronco hard-code', () => {
   it('uses whatever rig the profile holds', async () => {
     localStorage.setItem(
-      'retire.v1.profile',
+      'raytire.v1.profile',
       JSON.stringify({ rig: { name: 'Toyota 4Runner', rigClass: 'high_clearance' } }),
     )
     await mountAt('#/dest/moab')
@@ -239,20 +242,31 @@ describe('vehicle is a profile setting, not a Bronco hard-code', () => {
   })
 
   it('loads a profile saved before the rig existed', async () => {
-    localStorage.setItem('retire.v1.profile', JSON.stringify({ paceMph: 2.5 }))
+    localStorage.setItem('raytire.v1.profile', JSON.stringify({ paceMph: 2.5 }))
     await mountAt('#/dest/moab')
-    expect(text()).toContain('Ford Bronco')
+    expect(text()).toContain('Ford Bronco Sasquatch')
   })
 
   it('edits the rig from the Profile screen and persists it', async () => {
     await mountAt('#/profile')
     expect(text()).toContain('What you drive')
-    await click(buttonByText('Built 4x4'))
-    const saved = JSON.parse(localStorage.getItem('retire.v1.profile') ?? '{}')
-    expect(saved.rig).toEqual({ name: 'Ford Bronco', rigClass: 'advanced_4wd' })
+    await click(buttonByText('4WD + low range'))
+    const saved = JSON.parse(localStorage.getItem('raytire.v1.profile') ?? '{}')
+    expect(saved.rig).toEqual({ name: 'Ford Bronco Sasquatch', rigClass: 'four_wd' })
     await navigate('#/dest/moab')
     await click(buttonByText("Hell's Revenge"))
-    expect(text()).toContain('meets the minimum vehicle class')
+    expect(text()).toContain('beyond the Ford Bronco Sasquatch')
+  })
+
+  it('links Bronco owners to the Bronco tab, and nobody else', async () => {
+    await mountAt('#/dest/moab')
+    await click(buttonByText('🚙 Bronco tab'))
+    expect(location.hash).toBe('#/bronco')
+    localStorage.setItem('raytire.v1.profile', JSON.stringify({ rig: { name: 'Jeep Wrangler', rigClass: 'four_wd' } }))
+    act(() => root.unmount())
+    container.remove()
+    await mountAt('#/dest/moab')
+    expect(buttonByText('🚙 Bronco tab')).toBeUndefined()
   })
 })
 
@@ -271,7 +285,7 @@ describe('Durango screens still work', () => {
 
   it('renders the builder, saved, log and profile tabs', async () => {
     await mountAt('#/builder')
-    for (const tab of ['#/trips', '#/log', '#/profile']) {
+    for (const tab of ['#/trips', '#/log', '#/profile', '#/bronco']) {
       await navigate(tab)
       expect(container.querySelector('main')?.textContent?.length).toBeGreaterThan(20)
     }

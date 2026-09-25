@@ -1,5 +1,5 @@
 /**
- * Domain types for reTire.
+ * Domain types for RayTire.
  *
  * Design rule that outranks everything else in here: the model must be able to
  * say "I don't know". Every physical measurement is a `Measure`, which is
@@ -157,6 +157,19 @@ export interface Camp extends Sourced {
 
 export type FoodKind = 'brewery' | 'brewpub' | 'restaurant' | 'cafe' | 'casual'
 
+/**
+ * Explicit operating status. Only `active` may be offered as a current
+ * recommendation -- everything else is kept in the dataset (so the app never
+ * forgets and re-suggests it) but filtered out of anything the user would
+ * actually drive to today.
+ */
+export type BusinessStatus =
+  | 'active'
+  | 'seasonal'
+  | 'temporarily_closed'
+  | 'permanently_closed'
+  | 'unknown'
+
 export interface FoodStop extends Sourced {
   id: string
   name: string
@@ -170,8 +183,15 @@ export interface FoodStop extends Sourced {
    * stale hour is a wasted drive. We store what we last saw, plainly labelled.
    */
   hoursNote: string | null
-  /** Set when a place is known to have closed -- kept so we never re-suggest it. */
-  closed: string | null
+  status: BusinessStatus
+  /** True when closures are a normal part of this business's yearly cycle. */
+  seasonal: boolean
+  /** Why it is not `active`, when it isn't. Kept so the recommender never forgets. */
+  closureReason: string | null
+  /** Reported reopening date/season, if any evidence exists. */
+  reopeningDate: string | null
+  /** Anything else worth a human reading before they drive out -- relocations, name changes, ownership changes. */
+  notes: string | null
   lat: number
   lon: number
 }
@@ -518,4 +538,82 @@ export interface Region {
   home: boolean
   /** Region-wide live-conditions links, as source ids. */
   conditions: string[]
+}
+
+/* ------------------------------------------------------------------ bronco */
+
+/**
+ * A physical spec that is genuinely one fixed number does not need this, but
+ * several Bronco/Sasquatch figures differ by body style, trim, engine or
+ * printing, and Ford's own materials disagree with each other on a couple of
+ * them. Same rule as everywhere else: sourced, ranged when sources disagree,
+ * UNKNOWN when nobody credible said.
+ */
+export type BroncoConfigFactor = 'body_style' | 'trim' | 'engine' | 'model_year'
+
+export interface BroncoMeasure extends Sourced {
+  id: string
+  label: string
+  value: Measure
+  unit: string
+  decimals?: number
+  /** Which configuration axes this figure actually depends on, if any. */
+  variesBy: BroncoConfigFactor[]
+  note: string
+}
+
+export type GoatModeId =
+  | 'normal'
+  | 'eco'
+  | 'sport'
+  | 'slippery'
+  | 'sand'
+  | 'mud_ruts'
+  | 'baja'
+  | 'rock_crawl'
+
+export interface GoatMode extends Sourced {
+  id: GoatModeId
+  name: string
+  glyph: string
+  /** Which trims actually get this mode -- G.O.A.T. Modes are trim-dependent. */
+  standardOn: string
+  whatItDoes: string
+  bestFor: string
+  whenToUse: string
+  fieldNote: string
+}
+
+export interface CheatSheetEntry {
+  id: string
+  glyph: string
+  title: string
+  guidance: string
+  note?: string
+}
+
+export interface BroncoTireInfo extends Sourced {
+  factorySize: string
+  wheels: string
+  spare: string
+  coldPressureNote: string
+  offRoadPressureNote: string
+  tpmsNote: string
+  repairKitNote: string
+}
+
+export interface RecoveryItem {
+  id: string
+  label: string
+  note?: string
+}
+
+export interface RoofTentPhase {
+  title: string
+  items: string[]
+}
+
+export interface PreAdventureChecklistItem {
+  id: string
+  label: string
 }

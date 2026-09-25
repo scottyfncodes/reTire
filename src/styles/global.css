@@ -1,4 +1,4 @@
-/* reTire -- modern Colorado adventure journal, dark and earthy, phone first. */
+/* RayTire -- modern Colorado adventure journal, dark and earthy, phone first. */
 
 :root {
   /* Night in the San Juans: warm blacks, not blue-grey SaaS greys. */
@@ -653,6 +653,44 @@ input[type='range'] {
   color: var(--ice);
   text-decoration: none;
   border-bottom: 1px dotted rgb(119 176 204 / 40%);
+}
+
+/* -------------------------------------------------------------- disclosure */
+
+details.card > summary,
+details.card--flat > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 2px 0;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.card > summary::after,
+details.card--flat > summary::after {
+  content: '+';
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--bone-faint);
+  flex: none;
+}
+
+details[open].card > summary::after,
+details[open].card--flat > summary::after {
+  content: '\2212';
+}
+
+details.card > summary + *,
+details.card--flat > summary + * {
+  margin-top: 12px;
 }
 
 /* ------------------------------------------------------------------- tabs */
