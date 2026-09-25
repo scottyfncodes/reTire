@@ -9,9 +9,11 @@ export type Route =
   | { name: 'trip'; id: string }
   | { name: 'log' }
   | { name: 'profile' }
+  | { name: 'region'; id: string }
+  | { name: 'destination'; id: string }
   | { name: 'bronco' }
 
-function parse(hash: string): Route {
+export function parse(hash: string): Route {
   const path = hash.replace(/^#\/?/, '')
   const [head, tail] = path.split('/')
   switch (head) {
@@ -29,6 +31,11 @@ function parse(hash: string): Route {
       return { name: 'log' }
     case 'profile':
       return { name: 'profile' }
+    case 'region':
+      // Colorado is the home screen; there is no separate Colorado page.
+      return tail && tail !== 'colorado' ? { name: 'region', id: tail } : { name: 'home' }
+    case 'dest':
+      return tail ? { name: 'destination', id: tail } : { name: 'home' }
     case 'bronco':
       return { name: 'bronco' }
     default:

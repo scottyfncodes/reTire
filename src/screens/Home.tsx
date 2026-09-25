@@ -6,6 +6,9 @@ import { useWeather } from '../state/useWeather'
 import { WeatherPanel } from '../components/WeatherPanel'
 import { SectionTitle } from '../components/Bits'
 import { formatClock } from '../engine/time'
+import { RegionSwitch } from '../components/RegionSwitch'
+import { DESTINATIONS_BY_ID } from '../data/utah'
+import { formatDurationRange } from '../engine/itinerary'
 
 const MODE_ORDER: AdventureMode[] = [
   'big_day',
@@ -17,7 +20,8 @@ const MODE_ORDER: AdventureMode[] = [
 ]
 
 export function Home({ go }: { go: (path: string) => void }) {
-  const { constraints, trips, log, online } = useStore()
+  const { constraints, trips, log, online, profile } = useStore()
+  const moab = DESTINATIONS_BY_ID.moab
   const weather = useWeather(HOME.lat, HOME.lon, HOME.elevationFt)
 
   const confirmed = trips.find((t) => t.confirmed)
@@ -30,6 +34,8 @@ export function Home({ go }: { go: (path: string) => void }) {
         </div>
         <div className="tagline">Retirement, with a lot more altitude.</div>
       </header>
+
+      <RegionSwitch current="colorado" go={go} />
 
       {!online && (
         <div className="banner">
@@ -127,6 +133,30 @@ export function Home({ go }: { go: (path: string) => void }) {
         onClick={() => go('builder')}
       >
         Build a day trip
+      </button>
+
+      <SectionTitle>Go further</SectionTitle>
+      <button
+        type="button"
+        className="card card--tap utah-teaser"
+        onClick={() => go('region/utah')}
+      >
+        <div className="eyebrow" style={{ color: 'var(--ember-soft)' }}>
+          🏜️ Utah · new chapter
+        </div>
+        <h3 className="headline" style={{ marginTop: 4 }}>
+          Moab is about three hours away.
+        </h3>
+        {moab.fromDurango && (
+          <p className="tiny faint" style={{ margin: '4px 0 0' }}>
+            {formatDurationRange(moab.fromDurango.minutes)} non-stop, per mapping services
+          </p>
+        )}
+        <p className="tiny muted" style={{ margin: '6px 0 0' }}>
+          Slickrock, dunes and desert backways — and where the{' '}
+          {profile.rig.name.trim() || 'rig'} goes after school. Plus the San
+          Rafael Swell, the Paiute Trail and five more.
+        </p>
       </button>
 
       <SectionTitle>Today in Durango</SectionTitle>

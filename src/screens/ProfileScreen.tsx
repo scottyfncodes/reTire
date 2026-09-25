@@ -2,6 +2,7 @@ import type { ExperienceProfile, InterestTag } from '../data/types'
 import { DEFAULT_PROFILE } from '../data/profile'
 import { useStore } from '../state/store'
 import { Field, SectionTitle, Segmented } from '../components/Bits'
+import { RIG_CHOICES } from '../engine/offroad'
 
 const INTERESTS: InterestTag[] = [
   'scenery',
@@ -60,6 +61,27 @@ export function ProfileScreen({ go }: { go: (path: string) => void }) {
         These shape what gets recommended and what gets flagged. They never
         change the route's real numbers — those are shown either way, and the
         call is yours.
+      </p>
+
+      <SectionTitle>Vehicle</SectionTitle>
+      <Field label="What you drive">
+        <input
+          type="text"
+          value={profile.rig.name}
+          placeholder="e.g. Ford Bronco, 4Runner, Wrangler"
+          onChange={(e) => set({ rig: { ...profile.rig, name: e.target.value } })}
+        />
+      </Field>
+      <Segmented
+        label="How it's set up"
+        value={profile.rig.rigClass}
+        options={RIG_CHOICES.map((c) => ({ value: c.value, label: c.label }))}
+        onChange={(v) => set({ rig: { ...profile.rig, rigClass: v } })}
+      />
+      <p className="tiny faint" style={{ marginTop: -8 }}>
+        {RIG_CHOICES.find((c) => c.value === profile.rig.rigClass)?.help} Utah
+        routes compare this with their listed minimum vehicle. Meeting the
+        minimum is never the same as safe.
       </p>
 
       <SectionTitle>Walking</SectionTitle>
