@@ -277,6 +277,8 @@ export interface ExperienceProfile {
   paceMph: number
   /** Show the investment-memo presentation layer. */
   financeMode: boolean
+  /** What they drive. Used to say whether a route's vehicle class is met. */
+  rig: RigProfile
 }
 
 /* --------------------------------------------------------------- planning */
@@ -346,4 +348,174 @@ export type WarningLevel = 'info' | 'caution' | 'blocker'
 export interface Warning {
   level: WarningLevel
   message: string
+}
+
+/* ------------------------------------------------------ regions & off-road */
+
+/**
+ * Durango day trips are planned minute by minute. A Utah destination is a
+ * different shape of thing -- a place you drive to for days and explore from
+ * -- so it gets its own model rather than being forced through the itinerary
+ * engine. The honesty rules are the same: Measure for numbers, UNKNOWN when
+ * nobody credible said, sources and a check date on every record.
+ */
+
+/**
+ * The app's own three-step scale. It is a summary for scanning, never a
+ * promise: a route's published rating and its hazards always render next to
+ * it. `unknown` means no rating could be sourced, and it says so.
+ */
+export type TrailRating = 'beginner' | 'intermediate' | 'advanced' | 'unknown'
+
+/** What the ground and the route actually ask of you. */
+export type RouteFeature =
+  | 'slickrock'
+  | 'sand'
+  | 'rock_crawling'
+  | 'steep_climbs'
+  | 'water_crossings'
+  | 'narrow_ledges'
+  | 'shelf_road'
+  | 'graded_gravel'
+  | 'mud_when_wet'
+  | 'high_clearance'
+  | 'four_wd'
+  | 'recovery_gear'
+  | 'whip_flag'
+  | 'width_limits'
+  | 'remote'
+  | 'permit'
+  | 'forest'
+
+/**
+ * Vehicle classes, easiest to hardest. Deliberately about the vehicle, not a
+ * brand: the Bronco is one rig that can be entered, not the system.
+ */
+export type RigClass =
+  | 'standard_suv'
+  | 'high_clearance'
+  | 'four_wd'
+  | 'advanced_4wd'
+  | 'specialized'
+  | 'unknown'
+
+export type AdventureStyle =
+  | 'rock_crawling'
+  | 'scenic_backroad'
+  | 'dunes'
+  | 'multi_day_ohv'
+  | 'desert_exploring'
+  | 'mountain_backway'
+
+/** The rig the user drives. Any vehicle; the Bronco is only the default. */
+export interface RigProfile {
+  name: string
+  rigClass: Exclude<RigClass, 'unknown'>
+}
+
+export interface PublishedRating {
+  /** Source id of whoever published it. */
+  by: string
+  /** Their words, verbatim-ish: "5 of 10", "Difficult", "Easy". */
+  says: string
+}
+
+export interface OffroadRoute extends Sourced {
+  id: string
+  name: string
+  blurb: string
+  rating: TrailRating
+  /** What third parties actually published. Empty = nobody rated it. */
+  published: PublishedRating[]
+  /** Why the route sits where it does on our scale, disagreements included. */
+  ratingBasis: string
+  miles: Measure
+  milesNote?: string
+  features: RouteFeature[]
+  /** Minimum sensible vehicle class. Minimum, not sufficient. */
+  rig: RigClass
+  hazards: string[]
+  /** Official or operator page for this route, when one exists. */
+  officialUrl: string | null
+  /** Text for a maps search. Never invented coordinates. */
+  mapQuery: string
+}
+
+export interface PlaceNote extends Sourced {
+  name: string
+  /** Town the service is in. */
+  town: string
+  note: string
+  url: string | null
+  phone: string | null
+  /** Set when known closed, so it is never re-suggested. */
+  closed: string | null
+}
+
+export interface DestinationCamp extends Sourced {
+  name: string
+  kind: CampKind
+  sites: Measure
+  /** Stored as a labelled string with a check date -- fees change. */
+  fee: string | null
+  reservations: ReservationPolicy
+  note: string
+  url: string | null
+}
+
+export interface DriveFromHome extends Sourced {
+  /** What the numbers are measured to, e.g. "Moab" or "Green River (gateway)". */
+  to: string
+  miles: Measure
+  minutes: Measure
+  via: string
+}
+
+export interface SkillsSchool extends Sourced {
+  name: string
+  where: string
+  note: string
+  url: string
+}
+
+export interface Destination extends Sourced {
+  id: string
+  regionId: string
+  name: string
+  /** Where it is, the way a person would say it. */
+  area: string
+  emoji: string
+  flagship: boolean
+  tagline: string
+  why: string
+  /** What the driving actually feels like. */
+  feel: string
+  terrain: RouteFeature[]
+  styles: AdventureStyle[]
+  /** Town-centre anchor for weather and the maps hand-off. */
+  anchor: { lat: number; lon: number; label: string }
+  fromDurango: DriveFromHome | null
+  season: SeasonWindow
+  vehicleNotes: string
+  routes: OffroadRoute[]
+  camping: DestinationCamp[]
+  fuel: PlaceNote[]
+  food: PlaceNote[]
+  nearby: string[]
+  warnings: string[]
+  /** Source ids surfaced as the "go read the real thing" list. */
+  resources: string[]
+  skillsSchool?: SkillsSchool
+}
+
+export interface Region {
+  id: string
+  name: string
+  state: string
+  emoji: string
+  tagline: string
+  /** The home region is the existing Durango planner. */
+  home: boolean
+  /** Region-wide live-conditions links, as source ids. */
+  conditions: string[]
 }

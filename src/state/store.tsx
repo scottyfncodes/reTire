@@ -39,7 +39,9 @@ const StoreContext = createContext<Store | null>(null)
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [profile, setProfileState] = useState<ExperienceProfile>(() =>
-    readJson('profile', DEFAULT_PROFILE),
+    // Profiles saved before a field existed (the rig, for one) still load:
+    // anything missing comes from the defaults instead of being undefined.
+    ({ ...DEFAULT_PROFILE, ...readJson<Partial<ExperienceProfile>>('profile', {}) }),
   )
   const [constraints, setConstraintsState] = useState<PlanConstraints>(() => {
     const stored = readJson<PlanConstraints | null>('constraints', null)

@@ -63,6 +63,38 @@ Adventures are described by **depth** (Quick Outing → Expedition) rather than 
 beginner/advanced label, with the actual numbers alongside. The label
 summarises; the numbers explain.
 
+## Utah
+
+The second region. Colorado stays exactly what it was — the Durango day-trip
+planner on the home screen — and a Colorado ⇄ Utah switch at the top leads to
+**Utah**: eight destinations you drive to and explore from, with **Moab** as
+the flagship.
+
+| Destination | What it is |
+| --- | --- |
+| 🏜️ Moab | Slickrock from 🟢 Onion Creek to 🔴 Moab Rim, plus the Bronco school → next adventure ladder |
+| 🌅 Sand Hollow & Hurricane | State-park dunes and the BLM Sand Mountain OHV area |
+| 🪨 San Rafael Swell | Wedge Overlook / Buckhorn Draw backway, Temple Mountain mining roads |
+| 🌲 Paiute Trail System | A 275-mile main loop and 1,000+ miles of side trail; width limits |
+| 🌳 White Wash Sand Dunes | Fenced dunes with cottonwoods, south of Green River |
+| 🏖️ Little Sahara | 63,000 acres of dunes and Sand Mountain |
+| 🌄 Kanab & Grand Staircase | Cottonwood Canyon Road, Coral Pink Sand Dunes |
+| 🦕 Vernal & Dinosaur | Red Cloud Loop, Red Mountain OHV trail |
+
+Routes use a three-step scale — 🟢 Beginner, 🟡 Intermediate, 🔴 Advanced —
+plus an explicit ⚪ **Not rated** for anything nobody credible rates (dunes,
+mostly). A colour is only allowed on a route that cites someone's published
+rating, and the rating, who published it and why the route sits where it does
+are shown together. Where sources disagree the harder reading wins.
+
+Vehicle suitability is about the vehicle, not the brand. The profile holds a
+rig (name + class: standard SUV → high clearance → 4WD → built 4x4 → OHV); the
+Bronco is only the default. Each route compares its listed minimum with the
+rig and at best says *meets the minimum* — never *safe*.
+
+Utah data lives in `src/data/utah.ts` and `src/data/regions.ts`; the logic in
+`src/engine/offroad.ts`. A new destination is a data entry, not a new screen.
+
 ## Architecture
 
 ```
@@ -109,14 +141,16 @@ record cites one that exists.
 ```bash
 npm install
 npm run dev      # local dev server
-npm test         # 167 tests
+npm test         # 239 tests
 npm run build    # production build to dist/
 ```
 
 Tests cover itinerary generation, time arithmetic, drive and hike durations,
 return-home calculations, filtering, weather parsing, route requirements,
 camping constraints, food integration, saved adventures, offline state,
-malformed and missing data, and dataset integrity.
+malformed and missing data, and dataset integrity — plus Utah data honesty,
+the off-road engine, and real-DOM tests of the Utah screens and navigation
+(`src/screens/utah.ui.test.tsx`, jsdom).
 
 ## Deployment
 

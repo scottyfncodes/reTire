@@ -716,6 +716,269 @@ input[type='range'] {
   color: #f0d79b;
 }
 
+/* ------------------------------------------------------------ regions */
+
+/* Desert red for Utah, drawn from the same warm palette as the ember. */
+:root {
+  --slickrock: #c8553d;
+  --sand: #e2b77d;
+}
+
+.region-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 6px 0 4px;
+}
+
+.region-switch__btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--ink-600);
+  background: var(--ink-800);
+  text-align: left;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+.region-switch__btn:active {
+  transform: scale(0.985);
+}
+
+.region-switch__btn[aria-pressed='true'] {
+  border-color: var(--ember);
+  background: linear-gradient(135deg, rgb(227 118 44 / 18%), var(--ink-800) 75%);
+}
+
+.region-switch__glyph {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.region-switch__name {
+  display: block;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.region-switch__count {
+  display: block;
+  font-size: 11px;
+  color: var(--bone-faint);
+}
+
+.utah-teaser {
+  background: linear-gradient(135deg, rgb(200 85 61 / 22%), var(--ink-800) 70%);
+  border-color: rgb(200 85 61 / 45%);
+}
+
+/* ------------------------------------------------------- destinations */
+
+.dest-card__head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.dest-card__emoji {
+  font-size: 34px;
+  line-height: 1;
+  flex: none;
+}
+
+.dest-card--flagship {
+  border-color: rgb(200 85 61 / 55%);
+  background: linear-gradient(160deg, rgb(200 85 61 / 20%), var(--ink-800) 65%);
+}
+
+.dest-card__flag {
+  color: var(--sand);
+  margin-bottom: 8px;
+}
+
+.dest-card__facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+}
+
+.dest-card__value {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
+.dest-hero {
+  position: relative;
+  margin: 4px calc(var(--gutter) * -1) 0;
+  padding: 26px var(--gutter) 18px;
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgb(226 183 125 / 22%), transparent 60%),
+    linear-gradient(170deg, rgb(200 85 61 / 35%), var(--ink-900) 80%);
+  border-bottom: 1px solid var(--ink-600);
+  overflow: hidden;
+}
+
+.dest-hero__emoji {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  font-size: 64px;
+  opacity: 0.85;
+  line-height: 1;
+}
+
+.dest-hero .display {
+  padding-right: 70px;
+}
+
+/* ------------------------------------------------------------ routes */
+
+.ladder {
+  margin-bottom: 8px;
+}
+
+.ladder__title {
+  font-size: 17px;
+  font-weight: 750;
+  margin: 16px 0 2px;
+}
+
+.route {
+  padding: 0 14px 14px;
+  border-left-width: 4px;
+}
+
+.route--beginner {
+  border-left-color: var(--lichen);
+}
+
+.route--intermediate {
+  border-left-color: var(--caution);
+}
+
+.route--advanced {
+  border-left-color: var(--blocker);
+}
+
+.route--unknown {
+  border-left-color: var(--ink-400);
+}
+
+.route__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 0 0;
+  background: none;
+  border: 0;
+  text-align: left;
+}
+
+.route__dot {
+  font-size: 18px;
+  flex: none;
+}
+
+.route__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.route__name {
+  display: block;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.route__rating {
+  display: block;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bone-faint);
+}
+
+.route__chev {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--ink-500);
+  font-size: 18px;
+  color: var(--bone-dim);
+}
+
+.route__body .btn {
+  text-decoration: none;
+  color: var(--bone);
+  font-size: 14px;
+}
+
+.btn--disabled {
+  color: var(--bone-faint) !important;
+  cursor: default;
+}
+
+.school {
+  border-color: rgb(227 118 44 / 45%);
+  background: linear-gradient(160deg, rgb(227 118 44 / 16%), var(--ink-800) 70%);
+}
+
+.glossary__summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  min-height: 28px;
+  list-style-position: inside;
+}
+
+.glossary__list {
+  margin: 10px 0 0;
+}
+
+.glossary__item {
+  margin-bottom: 8px;
+}
+
+.glossary__item dt {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.glossary__item dd {
+  margin: 2px 0 0;
+}
+
+.link-list {
+  display: grid;
+  gap: 8px;
+}
+
+.link-list__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 48px;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--ink-600);
+  background: var(--ink-800);
+  color: var(--bone);
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 14.5px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
