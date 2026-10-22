@@ -12,35 +12,29 @@ import { high, mid } from './measure'
 
 export const MODE_META: Record<
   AdventureMode,
-  { emoji: string; label: string; blurb: string }
+  { label: string; blurb: string }
 > = {
   big_day: {
-    emoji: '\u{1F3D4}️',
     label: 'BIG DAY',
     blurb: 'Serious hiking and big objectives.',
   },
   fourwd: {
-    emoji: '\u{1F699}',
     label: '4WD MISSION',
     blurb: 'Roads that need the truck.',
   },
   day_trip: {
-    emoji: '\u{1F5FA}️',
     label: 'DAY TRIP',
     blurb: 'Out and back to Durango, same day.',
   },
   overnighter: {
-    emoji: '⛺',
     label: 'OVERNIGHTER',
     blurb: 'Rooftop tent goes up.',
   },
   explorer: {
-    emoji: '\u{1F3DA}️',
     label: 'EXPLORER',
     blurb: 'Ghost towns, mines and odd geography.',
   },
   full_send: {
-    emoji: '\u{1F37A}',
     label: 'FULL SEND',
     blurb: 'Adventure first, then a cold one.',
   },

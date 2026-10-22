@@ -82,7 +82,7 @@ export function Home({ go }: { go: (path: string) => void }) {
         onClick={() => go('bronco')}
       >
         <div className="chips" style={{ marginBottom: 8 }}>
-          <span className="chip chip--truck">🚙 BRONCO</span>
+          <span className="chip chip--truck">BRONCO</span>
         </div>
         <p className="tiny muted" style={{ margin: 0 }}>
           Know the rig. Then go find somewhere ridiculous to drive it.
@@ -97,9 +97,6 @@ export function Home({ go }: { go: (path: string) => void }) {
             className="mode"
             onClick={() => go(`mode/${mode}`)}
           >
-            <span className="mode__glyph" aria-hidden="true">
-              {MODE_META[mode].emoji}
-            </span>
             <span>
               <span className="mode__label">{MODE_META[mode].label}</span>
               <span className="mode__blurb" style={{ display: 'block' }}>
@@ -114,9 +111,6 @@ export function Home({ go }: { go: (path: string) => void }) {
           className="mode mode--wild"
           onClick={() => go('mode/dealers_choice')}
         >
-          <span className="mode__glyph" aria-hidden="true">
-            🎲
-          </span>
           <span>
             <span className="mode__label">DEALER'S CHOICE</span>
             <span className="mode__blurb" style={{ display: 'block' }}>
@@ -142,7 +136,7 @@ export function Home({ go }: { go: (path: string) => void }) {
         onClick={() => go('region/utah')}
       >
         <div className="eyebrow" style={{ color: 'var(--ember-soft)' }}>
-          🏜️ Utah · new chapter
+          Utah · new chapter
         </div>
         <h3 className="headline" style={{ marginTop: 4 }}>
           Moab is about three hours away.
@@ -153,7 +147,7 @@ export function Home({ go }: { go: (path: string) => void }) {
           </p>
         )}
         <p className="tiny muted" style={{ margin: '6px 0 0' }}>
-          Slickrock, dunes and desert backways — and where the{' '}
+          Slickrock, dunes and desert backways, and where the{' '}
           {profile.rig.name.trim() || 'rig'} goes after school. Plus the San
           Rafael Swell, the Paiute Trail and five more.
         </p>

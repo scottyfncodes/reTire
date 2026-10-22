@@ -18,7 +18,7 @@ const US550_TO_SILVERTON: DriveSegment = {
   roadClass: 'paved_mountain',
   vehicle: 'any_vehicle',
   notes:
-    'Paved the whole way and plowed in winter, but it is three high passes with no guardrail in places. CDOT closes it for avalanche control and crashes -- check COtrip the morning of.',
+    'Paved the whole way and plowed in winter, but it is three high passes with no guardrail in places. CDOT closes it for avalanche control and crashes. Check COtrip the morning of.',
   sources: ['codot_byways', 'cotrip'],
   lastChecked: CHECKED,
 }
@@ -69,14 +69,14 @@ export const ADVENTURES: Adventure[] = [
     stopIds: ['silverton', 'molas_pass_overlook'],
     campIds: ['south_mineral_cg', 'south_mineral_dispersed'],
     foodIds: ['steamworks', 'carver', 'animas_brewing'],
-    why: 'The highest-payoff hiking day within two hours of the condo. You climb 2,400-odd feet out of spruce into a basin of turquoise lakes at 12,000 ft, and the road in is ordinary gravel -- the Bronco is a convenience here, not a requirement.',
+    why: 'The highest-payoff hiking day within two hours of the condo. You climb 2,400-odd feet out of spruce into a basin of turquoise lakes at 12,000 ft, and the road in is ordinary gravel: the Bronco is a convenience here, not a requirement.',
     highlights: [
       'Lower and upper basins, plus Island Lake if the legs are willing',
       'Wildflower display that is genuinely nationally known, often peaking mid-to-late July',
       'Trailhead at 9,800 ft means the altitude work starts immediately',
     ],
     hazards: [
-      'Above treeline for hours -- be off the high ground before afternoon storms build',
+      'Above treeline for hours: be off the high ground before afternoon storms build',
       'Parking fills early on summer weekends',
       'Silverton has no brewpub since Avalanche closed; the beer is on the Durango end',
     ],
@@ -117,7 +117,7 @@ export const ADVENTURES: Adventure[] = [
         roadClass: 'technical_4wd',
         vehicle: 'four_wd_low_range',
         notes:
-          'BLM states the two 12,000 ft passes require high-clearance 4WD. Leg length not verified -- the app is not going to make one up.',
+          'BLM states the two 12,000 ft passes require high-clearance 4WD. Leg length not verified. The app is not going to make one up.',
         sources: ['blm_alpine_loop'],
         lastChecked: CHECKED,
       },
@@ -169,7 +169,7 @@ export const ADVENTURES: Adventure[] = [
     ],
     hazards: [
       'The summit route leaves the trail and has about 50 ft of real exposure at the crux',
-      'Fully exposed plateau -- weather is the whole game up there',
+      'Fully exposed plateau: weather is the whole game up there',
     ],
     season: {
       months: [7, 8, 9],
@@ -195,15 +195,15 @@ export const ADVENTURES: Adventure[] = [
     stopIds: ['andrews_lake', 'molas_pass_overlook', 'silverton'],
     campIds: ['little_molas_dispersed', 'south_mineral_cg'],
     foodIds: ['steamworks', 'animas_brewing'],
-    why: 'The only trail into the West Needle Mountains section of the Weminuche. Eleven miles round trip but only about 870 ft of net gain -- this is a distance day rather than a climbing day, which is a different kind of tired.',
+    why: 'The only trail into the West Needle Mountains section of the Weminuche. Eleven miles round trip but only about 870 ft of net gain: this is a distance day rather than a climbing day, which is a different kind of tired.',
     highlights: [
       'Twilight Peak and the Needles across the basin',
-      'Paved trailhead at 10,770 ft -- no approach road problem at all',
+      'Paved trailhead at 10,770 ft: no approach road problem at all',
       'Molas Pass overlook is on the way and costs you fifteen minutes',
     ],
     hazards: [
       'Rolling terrain: the return is not downhill, and the mileage catches people out',
-      'Wilderness area -- no bikes, no motors, and the rules are enforced',
+      'Wilderness area: no bikes, no motors, and the rules are enforced',
     ],
     season: {
       months: [7, 8, 9],
@@ -241,7 +241,7 @@ export const ADVENTURES: Adventure[] = [
         roadClass: 'high_clearance',
         vehicle: 'four_wd',
         notes:
-          'Steeper and looser from roughly the 4-mile point. Parking at the 2WD area instead adds about 1.4 mi round trip on foot -- a fair trade if conditions look bad.',
+          'Steeper and looser from roughly the 4-mile point. Parking at the 2WD area instead adds about 1.4 mi round trip on foot, a fair trade if conditions look bad.',
         sources: ['durango_trails'],
         lastChecked: CHECKED,
       },
@@ -314,7 +314,7 @@ export const ADVENTURES: Adventure[] = [
     stopIds: ['la_plata_mining'],
     campIds: ['la_plata_dispersed'],
     foodIds: ['carver', 'ska', 'mancos_brewing'],
-    why: 'The closest place to the condo where the truck genuinely earns its keep. Under half an hour of pavement, then a canyon full of mining history, then two miles that separate the Bronco from the rental cars -- and you step out onto the Colorado Trail at 11,600 ft.',
+    why: 'The closest place to the condo where the truck genuinely earns its keep. Under half an hour of pavement, then a canyon full of mining history, then two miles that separate the Bronco from the rental cars, and you step out onto the Colorado Trail at 11,600 ft.',
     highlights: [
       'Mining remains the length of the canyon',
       'Colorado Trail access straight out of the parking area',
@@ -323,7 +323,7 @@ export const ADVENTURES: Adventure[] = [
     hazards: [
       'Steep drop-offs on the upper road; this is the part that wants a driver who is paying attention',
       'You arrive at 11,600 ft with zero acclimatisation runway',
-      'Mixed private and public land in the canyon -- posted parcels are real',
+      'Mixed private and public land in the canyon: posted parcels are real',
     ],
     season: {
       months: [7, 8, 9],
@@ -416,14 +416,14 @@ export const ADVENTURES: Adventure[] = [
     stopIds: ['chimney_rock'],
     campIds: [],
     foodIds: ['riffraff', 'carver'],
-    why: 'Low, dry, and open when the high country is buried -- which makes it the right answer in May and October as much as in July. Ancestral Puebloan architecture placed for the northern lunar standstill, on a mesa between two spires.',
+    why: 'Low, dry, and open when the high country is buried, which makes it the right answer in May and October as much as in July. Ancestral Puebloan architecture placed for the northern lunar standstill, on a mesa between two spires.',
     highlights: [
       'Guided Great House tour, reported to check in at 10:00 and start at 10:30',
       'Self-guided access during open hours',
       'Pairs naturally with Pagosa Springs for food on the way home',
     ],
     hazards: [
-      'Upper mesa access has a daily cut-off well before closing -- turning up late costs you the main event',
+      'Upper mesa access has a daily cut-off well before closing: turning up late costs you the main event',
       'Season and tour schedule are set by the operating association, not by you',
     ],
     season: {
@@ -477,13 +477,13 @@ export const ADVENTURES: Adventure[] = [
       'Mancos Brewing on the return leg',
     ],
     hazards: [
-      'Ranger-led dwelling tours need tickets and sell out -- sort that before you drive',
+      'Ranger-led dwelling tours need tickets and sell out: sort that before you drive',
       'Dogs are not allowed on park trails',
       'Entrance fee applies; confirm the current amount with NPS',
     ],
     season: {
       months: [4, 5, 6, 7, 8, 9, 10],
-      note: 'Road and facility seasons vary through the year -- confirm with the park before driving out.',
+      note: 'Road and facility seasons vary through the year: confirm with the park before driving out.',
       confidence: 'reported',
       sources: ['nps_meve'],
       lastChecked: CHECKED,
@@ -530,7 +530,7 @@ export const ADVENTURES: Adventure[] = [
       'Works as a first outing of the season while the high passes are still shut',
     ],
     hazards: [
-      'Narrow with limited passing -- meeting a truck coming the other way is the main event',
+      'Narrow with limited passing: meeting a truck coming the other way is the main event',
       'Boggy trail sections after rain',
     ],
     season: {
@@ -575,7 +575,7 @@ export const ADVENTURES: Adventure[] = [
       'Campground is 26 sites and strictly first-come, so the dispersed corridor is the backup plan',
     ],
     hazards: [
-      'Cold nights year-round at this elevation -- check the overnight low, not the daytime high',
+      'Cold nights year-round at this elevation: check the overnight low, not the daytime high',
       'Fire restrictions change through the season and are enforced',
       'Dispersed camping rules are posted at the road junction; those signs are the authority, not this app',
     ],
@@ -628,7 +628,7 @@ export const ADVENTURES: Adventure[] = [
       'Kennebec Pass and the Colorado Trail available the next morning',
     ],
     hazards: [
-      'Private parcels in the canyon are real and posted -- read before you park',
+      'Private parcels in the canyon are real and posted: read before you park',
       'Historic mining district upstream; treat water and think about where it came from',
       'Fire restrictions change through the season',
     ],
@@ -673,7 +673,7 @@ export const ADVENTURES: Adventure[] = [
     stopIds: [],
     campIds: ['haviland_lake_cg'],
     foodIds: ['animas_brewing', 'steamworks', 'carver'],
-    why: 'Twenty minutes of driving to a creek trail at 7,800 ft that is walkable in April and November, when every route in this app that mentions the word "pass" is under snow. Turn around whenever you like -- the distance is your choice, not the trail\'s.',
+    why: 'Twenty minutes of driving to a creek trail at 7,800 ft that is walkable in April and November, when every route in this app that mentions the word "pass" is under snow. Turn around whenever you like: the distance is your choice, not the trail\'s.',
     highlights: [
       'Low enough for a genuinely long season',
       'Out-and-back, so the day is exactly as long as you decide',
@@ -723,7 +723,7 @@ export const ADVENTURES: Adventure[] = [
       'Works in mud season when everything else is a swamp',
     ],
     hazards: [
-      'South-facing and genuinely hot in midsummer -- go early',
+      'South-facing and genuinely hot in midsummer: go early',
       'Rattlesnakes are present in the lower Animas valley',
       'Small trailhead lot that fills fast',
     ],

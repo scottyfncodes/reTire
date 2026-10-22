@@ -48,7 +48,7 @@ export function Trips({ go }: { go: (path: string) => void }) {
 
             <textarea
               value={trip.notes}
-              placeholder="Notes for the two of you — who is driving, what to bring, where to meet."
+              placeholder="Notes for the two of you: who is driving, what to bring, where to meet."
               onChange={(e) => saveTrip({ ...trip, notes: e.target.value })}
             />
 
@@ -85,7 +85,7 @@ export function Trips({ go }: { go: (path: string) => void }) {
       <SectionTitle>How sharing works</SectionTitle>
       <p className="tiny faint">
         Notes and packing ticks live on this device. Two phones means two
-        copies — deliberate, since it keeps the app working with no signal and
+        copies. Deliberate, since it keeps the app working with no signal and
         no account to sign in to at a trailhead.
       </p>
     </div>

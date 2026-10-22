@@ -2,7 +2,7 @@ import type { OffroadRoute, RigProfile } from '../data/types'
 import { FEATURE_META, mapSearchUrl, RATING_META, RIG_LABEL, rigVerdict } from '../engine/offroad'
 import { formatMeasure } from '../engine/measure'
 import { sourcesFor } from '../data/sources'
-import { SourceLine } from './Bits'
+import { RatingDot, SourceLine } from './Bits'
 
 /**
  * One route. Collapsed it is a single scannable row -- colour, name, one line.
@@ -33,9 +33,7 @@ export function RouteCard({
         aria-controls={bodyId}
         onClick={onToggle}
       >
-        <span className="route__dot" aria-hidden="true">
-          {meta.dot}
-        </span>
+        <RatingDot rating={route.rating} />
         <span className="route__title">
           <span className="route__name">{route.name}</span>
           <span className="route__rating">
@@ -57,7 +55,7 @@ export function RouteCard({
           <div className="chips" style={{ margin: '10px 0' }}>
             {route.features.map((f) => (
               <span key={f} className="chip">
-                {FEATURE_META[f].emoji} {FEATURE_META[f].label}
+                {FEATURE_META[f].label}
               </span>
             ))}
           </div>
@@ -65,7 +63,7 @@ export function RouteCard({
           <div className="eyebrow">Difficulty</div>
           <p className="tiny muted" style={{ margin: '4px 0 6px' }}>
             <strong style={{ color: 'var(--bone)' }}>
-              {meta.dot} {meta.label}.
+              {meta.label}.
             </strong>{' '}
             {route.ratingBasis}
           </p>
@@ -103,7 +101,7 @@ export function RouteCard({
             ) : (
               formatMeasure(route.miles, 'mi', { decimals: 1 })
             )}
-            {route.milesNote ? ` — ${route.milesNote}` : ''}
+            {route.milesNote ? `. ${route.milesNote}` : ''}
           </p>
 
           {route.hazards.length > 0 && (
@@ -124,7 +122,7 @@ export function RouteCard({
               target="_blank"
               rel="noreferrer noopener"
             >
-              🗺️ Map
+              Map ↗
             </a>
             {route.officialUrl ? (
               <a

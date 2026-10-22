@@ -21,9 +21,6 @@ export function RegionSwitch({
           aria-pressed={region.id === current}
           onClick={() => go(region.home ? '' : `region/${region.id}`)}
         >
-          <span className="region-switch__glyph" aria-hidden="true">
-            {region.emoji}
-          </span>
           <span>
             <span className="region-switch__name">{region.name}</span>
             <span className="region-switch__count">

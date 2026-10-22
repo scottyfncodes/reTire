@@ -74,7 +74,7 @@ export const BRONCO_DASHBOARD: BroncoMeasure[] = [
     unit: 'in',
     decimals: 0,
     variesBy: [],
-    note: 'LT315/70R17 mud-terrain tires on 17-in beadlock-capable wheels, per Ford. The spare matches -- full-size, not a compact.',
+    note: 'LT315/70R17 mud-terrain tires on 17-in beadlock-capable wheels, per Ford. The spare matches: full-size, not a compact.',
     sources: ['ford_bronco'],
     lastChecked: CHECKED,
   },
@@ -104,7 +104,7 @@ export const BRONCO_BREAKOVER: BroncoMeasure = {
   unit: '°',
   decimals: 1,
   variesBy: ['body_style'],
-  note: '29.0° on 2-door Sasquatch, 26.3° on 4-door Sasquatch, per Ford -- the shorter wheelbase is the whole difference.',
+  note: '29.0° on 2-door Sasquatch, 26.3° on 4-door Sasquatch, per Ford: the shorter wheelbase is the whole difference.',
   sources: ['ford_bronco'],
   lastChecked: CHECKED,
 }
@@ -130,7 +130,7 @@ export const BRONCO_FACTORY_EQUIPMENT: string[] = [
   'Electronically disconnecting front sway bar for extra front-axle articulation off-road',
   'Steel skid plates and rock rails',
   '35-in mud-terrain tires on 17-in beadlock-capable wheels, plus a matching full-size spare',
-  'G.O.A.T. Modes terrain management (see below) -- trim-dependent, not all modes on every Bronco',
+  'G.O.A.T. Modes terrain management (see below): trim-dependent, not all modes on every Bronco',
   'Advanced 4x4 with automatic on-demand engagement (part-time 4WD with low range on the transfer case)',
 ]
 
@@ -139,12 +139,12 @@ export const BRONCO_FACTORY_RECOVERY: RecoveryItem[] = [
   {
     id: 'tow_hooks',
     label: 'Frame-mounted front tow/recovery hooks',
-    note: 'Standard on the Bronco. Rear recovery hardware varies by bumper and hitch configuration -- confirm what your specific rear bumper actually has.',
+    note: 'Standard on the Bronco. Rear recovery hardware varies by bumper and hitch configuration: confirm what your specific rear bumper actually has.',
   },
 ]
 
 export const BRONCO_RECOVERY_SAFETY_NOTE =
-  "Before you ever pull on anything: confirm which points on THIS Bronco are rated recovery points (not everything that looks like a hook is one), and follow Ford's own guidance in the Crash and Breakdown Information chapter of the owner's manual -- rated strap strength, no metal-hook chains or cables, never load a point beyond the vehicle's gross weight rating. This app does not walk through recovery technique; that is exactly the kind of thing that hurts someone when it is learned from an app instead of from the manual and practice."
+  "Before you ever pull on anything: confirm which points on THIS Bronco are rated recovery points (not everything that looks like a hook is one), and follow Ford's own guidance in the Crash and Breakdown Information chapter of the owner's manual: rated strap strength, no metal-hook chains or cables, never load a point beyond the vehicle's gross weight rating. This app does not walk through recovery technique; that is exactly the kind of thing that hurts someone when it is learned from an app instead of from the manual and practice."
 
 export const BRONCO_PERSONAL_RECOVERY_GEAR: RecoveryItem[] = [
   { id: 'strap', label: 'Kinetic recovery strap (soft, rated for the vehicle weight)' },
@@ -157,7 +157,7 @@ export const BRONCO_PERSONAL_RECOVERY_GEAR: RecoveryItem[] = [
   { id: 'tools', label: 'Basic tool kit, tire iron, jack, wheel chocks' },
   { id: 'firstaid', label: 'First aid kit' },
   { id: 'water', label: 'Extra water, beyond what the hike needs' },
-  { id: 'comms', label: 'Emergency communication (satellite messenger/PLB) -- most of this country has no cell service' },
+  { id: 'comms', label: 'Emergency communication (satellite messenger/PLB): most of this country has no cell service' },
 ]
 
 /**
@@ -171,7 +171,6 @@ export const GOAT_MODES: GoatMode[] = [
   {
     id: 'normal',
     name: 'Normal',
-    glyph: '🛣️',
     standardOn: 'All 4x4 Bronco trims',
     whatItDoes: 'Balanced throttle, shifting and traction settings for everyday driving.',
     bestFor: 'Pavement, gravel roads, the drive to the trailhead.',
@@ -183,7 +182,6 @@ export const GOAT_MODES: GoatMode[] = [
   {
     id: 'eco',
     name: 'Eco',
-    glyph: '🍃',
     standardOn: 'All 4x4 Bronco trims',
     whatItDoes: 'Softens throttle response and adjusts shift points to favor fuel economy.',
     bestFor: 'Long paved stretches, e.g. the highway miles before the fun starts.',
@@ -195,19 +193,17 @@ export const GOAT_MODES: GoatMode[] = [
   {
     id: 'sport',
     name: 'Sport',
-    glyph: '🏁',
     standardOn: 'All 4x4 Bronco trims',
     whatItDoes: 'Sharper throttle mapping and steering feel, quicker shifts.',
     bestFor: 'Paved mountain roads with real corners, e.g. the passes on US 550.',
     whenToUse: 'When the road is good and you want the truck more responsive.',
-    fieldNote: 'Not an off-road mode -- it is the on-road mode with the personality turned up.',
+    fieldNote: 'Not an off-road mode. It is the on-road mode with the personality turned up.',
     sources: ['ford_bronco'],
     lastChecked: CHECKED,
   },
   {
     id: 'slippery',
     name: 'Slippery',
-    glyph: '❄️',
     standardOn: 'All 4x4 Bronco trims',
     whatItDoes: 'Softens throttle and retunes traction/stability control for low-grip surfaces.',
     bestFor: 'Snow, ice, wet pavement, and greasy dirt after rain.',
@@ -219,23 +215,21 @@ export const GOAT_MODES: GoatMode[] = [
   {
     id: 'sand',
     name: 'Sand',
-    glyph: '🏜️',
     standardOn: 'All 4x4 Bronco trims',
     whatItDoes: 'Adjusts steering and holds lower gears longer to keep momentum, with a low-speed front camera view.',
     bestFor: 'Loose sand.',
     whenToUse: "Not the common case in the San Juans, but it is there if a route needs it.",
-    fieldNote: 'Momentum matters more than horsepower in sand -- do not stop and expect to restart easily.',
+    fieldNote: 'Momentum matters more than horsepower in sand: do not stop and expect to restart easily.',
     sources: ['ford_bronco'],
     lastChecked: CHECKED,
   },
   {
     id: 'mud_ruts',
     name: 'Mud/Ruts',
-    glyph: '🟤',
-    standardOn: 'Documented on higher trims (e.g. Badlands, Wildtrak) -- check this truck’s mode dial rather than assuming.',
+    standardOn: 'Documented on higher trims (e.g. Badlands, Wildtrak). Check this truck’s mode dial rather than assuming.',
     whatItDoes: 'Engages 4WD lock behavior tuned to keep tires driving through mud and rutted ground.',
     bestFor: 'Muddy or deeply rutted forest roads.',
-    whenToUse: 'When the road is soft, rutted or actively muddy -- La Plata Canyon after rain is the local example.',
+    whenToUse: 'When the road is soft, rutted or actively muddy: La Plata Canyon after rain is the local example.',
     fieldNote: 'Ruts want you to pick a line and commit, not fight the wheel across them.',
     sources: ['ford_bronco'],
     lastChecked: CHECKED,
@@ -243,10 +237,9 @@ export const GOAT_MODES: GoatMode[] = [
   {
     id: 'baja',
     name: 'Baja',
-    glyph: '💨',
-    standardOn: 'Documented on higher trims (e.g. Badlands, Wildtrak, Raptor) -- check this truck’s mode dial rather than assuming.',
+    standardOn: 'Documented on higher trims (e.g. Badlands, Wildtrak, Raptor). Check this truck’s mode dial rather than assuming.',
     whatItDoes: 'Tunes suspension, throttle and traction control for sustained higher-speed travel on open, loose terrain.',
-    bestFor: 'Open desert or graded roads at speed -- not tight technical trail.',
+    bestFor: 'Open desert or graded roads at speed, not tight technical trail.',
     whenToUse: 'Rarely relevant on the tight, technical San Juan forest roads this app plans around.',
     fieldNote: 'Wrong tool for a narrow shelf road. This is for wide-open terrain, not Ophir Pass.',
     sources: ['ford_bronco'],
@@ -255,8 +248,7 @@ export const GOAT_MODES: GoatMode[] = [
   {
     id: 'rock_crawl',
     name: 'Rock Crawl',
-    glyph: '🪨',
-    standardOn: 'Badlands and Raptor -- check this truck’s mode dial rather than assuming.',
+    standardOn: 'Badlands and Raptor: check this truck’s mode dial rather than assuming.',
     whatItDoes: 'Engages 4WD low-range lock behavior and the rear locker for maximum low-speed traction, with the front camera active.',
     bestFor: 'Technical rock, ledges, and slow, deliberate lines.',
     whenToUse: 'The technical sections of routes like Engineer Pass or Kennebec Pass, once you are in low range.',
@@ -269,33 +261,28 @@ export const GOAT_MODES: GoatMode[] = [
 export const CHEAT_SHEET: CheatSheetEntry[] = [
   {
     id: 'rocky',
-    glyph: '🪨',
     title: 'Rocky / technical',
     guidance: 'Low range, Rock Crawl mode if this truck has it (else Slippery or 4A/4L manually). Slow and deliberate.',
-    note: 'Trims without Rock Crawl still have manual 4L -- pick your line and keep the speed down.',
+    note: 'Trims without Rock Crawl still have manual 4L: pick your line and keep the speed down.',
   },
   {
     id: 'sand',
-    glyph: '🏜️',
     title: 'Sand',
     guidance: 'Sand mode if present. Keep momentum; do not stop mid-dune or mid-wash.',
   },
   {
     id: 'mud',
-    glyph: '🟤',
     title: 'Mud / ruts',
-    guidance: 'Mud/Ruts mode if present, else 4A/4H. Pick a line and commit -- do not fight the ruts.',
+    guidance: 'Mud/Ruts mode if present, else 4A/4H. Pick a line and commit: do not fight the ruts.',
     note: 'Airing down helps float here; air back up before real pavement (see Tires).',
   },
   {
     id: 'forest',
-    glyph: '🌲',
     title: 'Forest road',
     guidance: '4WD or high-clearance as the route requires (check the road requirement for that specific route). Normal or Slippery mode covers most graded forest roads.',
   },
   {
     id: 'pavement',
-    glyph: '🛣️',
     title: 'Back on pavement',
     guidance: 'Normal or Eco mode, 2WD/4A if the drivetrain allows it, and check tire pressure before any real highway distance if you aired down.',
   },
@@ -304,13 +291,13 @@ export const CHEAT_SHEET: CheatSheetEntry[] = [
 export const TIRE_INFO: BroncoTireInfo = {
   factorySize: 'LT315/70R17 (approx. 35 in) mud-terrain, on 17-in beadlock-capable wheels',
   wheels: '17-in beadlock-capable alloy wheels, Sasquatch package',
-  spare: 'Full-size, matching spare -- not a compact temporary tire',
+  spare: 'Full-size, matching spare, not a compact temporary tire',
   coldPressureNote:
-    "Ford specifies a cold tire pressure on this vehicle's own door-jamb placard (driver-side B-pillar). Owner reports on Sasquatch-equipped trucks commonly cite figures in the high 30s psi, but the number on THIS truck's placard is the one that matters -- not a number repeated online.",
+    "Ford specifies a cold tire pressure on this vehicle's own door-jamb placard (driver-side B-pillar). Owner reports on Sasquatch-equipped trucks commonly cite figures in the high 30s psi, but the number on THIS truck's placard is the one that matters, not a number repeated online.",
   offRoadPressureNote:
     "Ford does not publish a separate off-road tire pressure. Airing down is a technique the driver chooses based on terrain (softer for traction and ride on rock/sand/snow, at the cost of sidewall protection and handling), not a manufacturer-specified number. There is no single 'right' off-road PSI for this truck.",
   tpmsNote:
-    'Direct TPMS with a sensor in each wheel; the warning tells you at least one tire is meaningfully below placard pressure, not which one or by how much -- carry a gauge.',
+    'Direct TPMS with a sensor in each wheel; the warning tells you at least one tire is meaningfully below placard pressure, not which one or by how much. Carry a gauge.',
   repairKitNote:
     'Airing down and back up needs a compressor and a gauge you trust, not just the dash warning light. A plug kit handles most punctures in the field; a sidewall cut on a 35 is a spare-tire problem, not a plug-kit problem.',
   sources: ['ford_bronco', 'bronco6g'],
@@ -328,7 +315,7 @@ export const ROOF_TENT_PHASES: RoofTentPhase[] = [
       'Tent itself latched/secured for travel, per its own manual',
       'Mounting hardware (crossbars, tent-to-rack mounts) checked snug',
       'Ladder secured for travel',
-      'Loose gear inside and on the roof secured -- nothing that can shift or fly off',
+      'Loose gear inside and on the roof secured: nothing that can shift or fly off',
       'Doors and windows secured',
       'Roof-top load considered against the vehicle’s roof load rating and your other cargo',
     ],
@@ -336,10 +323,10 @@ export const ROOF_TENT_PHASES: RoofTentPhase[] = [
   {
     title: 'Setting up',
     items: [
-      'Pick a site that is actually suitable for a rooftop tent -- clearance above and around the vehicle',
+      'Pick a site that is actually suitable for a rooftop tent: clearance above and around the vehicle',
       'Park on reasonably level ground; use leveling blocks if it is close',
       'Check wind and weather before committing to the spot',
-      'Confirm you are legally allowed to be there -- see this app’s camping notes and the signs on the ground',
+      'Confirm you are legally allowed to be there: see this app’s camping notes and the signs on the ground',
     ],
   },
   {

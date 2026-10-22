@@ -28,7 +28,7 @@ export function WeatherPanel({
       <div className="card card--flat">
         <div className="eyebrow">Weather</div>
         <p className="tiny muted" style={{ margin: '6px 0 0' }}>
-          Forecast unavailable — no network, or the forecast service did not
+          Forecast unavailable: no network, or the forecast service did not
           answer. Nothing is being shown in its place.
         </p>
       </div>
@@ -72,25 +72,25 @@ export function WeatherPanel({
         </div>
         <div className="stat">
           <div className="stat__value num">
-            {day.precipChance === null ? '—' : `${Math.round(day.precipChance)}%`}
+            {day.precipChance === null ? '–' : `${Math.round(day.precipChance)}%`}
           </div>
           <div className="stat__label">Precip chance</div>
         </div>
         <div className="stat">
           <div className="stat__value num">
-            {day.gustMaxMph === null ? '—' : `${Math.round(day.gustMaxMph)}`}
+            {day.gustMaxMph === null ? '–' : `${Math.round(day.gustMaxMph)}`}
           </div>
           <div className="stat__label">Gusts mph</div>
         </div>
         <div className="stat">
           <div className="stat__value num">
-            {day.sunrise === null ? '—' : formatClock(day.sunrise)}
+            {day.sunrise === null ? '–' : formatClock(day.sunrise)}
           </div>
           <div className="stat__label">Sunrise</div>
         </div>
         <div className="stat">
           <div className="stat__value num">
-            {day.sunset === null ? '—' : formatClock(day.sunset)}
+            {day.sunset === null ? '–' : formatClock(day.sunset)}
           </div>
           <div className="stat__label">Sunset</div>
         </div>
@@ -108,7 +108,7 @@ export function WeatherPanel({
           Open-Meteo
         </a>
         {state.data.stale
-          ? ` · served from cache, ${ageMinutes} min old — you are offline`
+          ? ` · served from cache, ${ageMinutes} min old, you are offline`
           : ` · fetched ${ageMinutes} min ago`}
         . Weather is one input into the plan, not a verdict on it.
       </p>

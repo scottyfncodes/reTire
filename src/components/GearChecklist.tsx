@@ -42,7 +42,7 @@ export function GearChecklist({
                   <span>
                     {item.label}
                     {item.note && (
-                      <span className="faint tiny"> — {item.note}</span>
+                      <span className="faint tiny"> ({item.note})</span>
                     )}
                   </span>
                 </li>

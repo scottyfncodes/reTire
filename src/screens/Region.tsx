@@ -5,7 +5,7 @@ import type { TrailRating } from '../data/types'
 import { useStore } from '../state/store'
 import { RegionSwitch } from '../components/RegionSwitch'
 import { DestinationCard } from '../components/DestinationCard'
-import { SectionTitle } from '../components/Bits'
+import { RatingDot, SectionTitle } from '../components/Bits'
 
 const SCALE: TrailRating[] = ['beginner', 'intermediate', 'advanced', 'unknown']
 
@@ -37,13 +37,13 @@ export function RegionScreen({ id, go }: { id: string; go: (path: string) => voi
       <RegionSwitch current={region.id} go={go} />
 
       <h1 className="display" style={{ margin: '18px 0 4px' }}>
-        {region.emoji} {region.name}
+        {region.name}
       </h1>
       <p className="muted" style={{ marginTop: 6 }}>
         {region.tagline}
       </p>
       <p className="tiny faint" style={{ marginBottom: 16 }}>
-        Not day trips any more — these are places you drive to and explore
+        Not day trips any more. These are places you drive to and explore
         from. Pick a place, see how hard it gets, and take the {rigName} as far
         as feels right.
       </p>
@@ -62,9 +62,9 @@ export function RegionScreen({ id, go }: { id: string; go: (path: string) => voi
         {SCALE.map((r) => (
           <p key={r} className="tiny" style={{ margin: '0 0 8px' }}>
             <strong>
-              {RATING_META[r].dot} {RATING_META[r].label}
-            </strong>{' '}
-            <span className="muted">— {RATING_META[r].blurb}</span>
+              <RatingDot rating={r} /> {RATING_META[r].label}
+            </strong>
+            <span className="muted">: {RATING_META[r].blurb}</span>
           </p>
         ))}
         <p className="tiny faint" style={{ margin: '8px 0 0' }}>
@@ -90,7 +90,7 @@ export function RegionScreen({ id, go }: { id: string; go: (path: string) => voi
       <div className="card card--flat">
         <p className="tiny muted" style={{ marginTop: 0 }}>
           Live closures, fire restrictions and road conditions are not stored
-          in this app — anything stored would be stale. Check these the day you
+          in this app, since anything stored would be stale. Check these the day you
           go:
         </p>
         <div className="link-list">

@@ -32,7 +32,7 @@ export const HIKES: Hike[] = [
     wilderness: null,
     dogs: 'unknown',
     permits:
-      'No permit required as of last check. A permit system has been publicly discussed for this basin -- confirm with San Juan NF before you go.',
+      'No permit required as of last check. A permit system has been publicly discussed for this basin. Confirm with San Juan NF before you go.',
     parking: {
       spaces: null,
       notes:
@@ -66,7 +66,7 @@ export const HIKES: Hike[] = [
     ratedDifficulty: null,
     hazards: [
       'The summit push leaves the trail; roughly 50 ft of genuinely exposed scrambling at the crux',
-      'The meadow and plateau are fully above treeline -- no shelter from storms',
+      'The meadow and plateau are fully above treeline: no shelter from storms',
     ],
     wilderness: null,
     dogs: 'unknown',
@@ -103,7 +103,7 @@ export const HIKES: Hike[] = [
     highPointFt: 11640,
     ratedDifficulty: null,
     hazards: [
-      'Long day at altitude even though the net gain is modest -- the first two miles do most of the climbing',
+      'Long day at altitude even though the net gain is modest: the first two miles do most of the climbing',
       'Rolling terrain means the return is not all downhill',
     ],
     wilderness: 'Weminuche Wilderness (West Needle Mountains)',
@@ -142,7 +142,7 @@ export const HIKES: Hike[] = [
     ratedDifficulty: null,
     hazards: [
       'Steep grades and frequent stream crossings',
-      'Open tundra above the lakes -- fast-moving weather with nowhere to hide',
+      'Open tundra above the lakes: fast-moving weather with nowhere to hide',
       'Route-finding on the Continental Divide loop variant',
     ],
     wilderness: 'Weminuche Wilderness',
@@ -251,7 +251,7 @@ export const HIKES: Hike[] = [
     highPointFt: 8160,
     ratedDifficulty: null,
     hazards: [
-      'South-facing and dry -- genuinely hot midday in summer',
+      'South-facing and dry: genuinely hot midday in summer',
       'Rattlesnakes are present in the lower Animas valley',
     ],
     wilderness: null,
@@ -268,7 +268,7 @@ export const HIKES: Hike[] = [
     },
     season: {
       months: [3, 4, 5, 6, 9, 10, 11],
-      note: 'A shoulder-season and mud-season standby -- it is in town and low. Hot in midsummer.',
+      note: 'A shoulder-season and mud-season standby: it is in town and low. Hot in midsummer.',
       confidence: 'reported',
       sources: ['durango_trails'],
       lastChecked: CHECKED,
@@ -291,7 +291,7 @@ export const HIKES: Hike[] = [
     highPointFt: 8880,
     ratedDifficulty: null,
     hazards: [
-      'Shared with mountain bikes and single-track motorcycles -- listen up',
+      'Shared with mountain bikes and single-track motorcycles: listen up',
       'Creek crossings can be pushy during runoff',
     ],
     wilderness: 'Adjacent to Hermosa Creek Wilderness',
@@ -328,7 +328,7 @@ export const HIKES: Hike[] = [
     highPointFt: 12000,
     ratedDifficulty: null,
     hazards: [
-      'Starts at 11,600 ft -- no acclimatisation runway at all',
+      'Starts at 11,600 ft: no acclimatisation runway at all',
       'Entirely above or near treeline; storms arrive fast',
       'Getting back down the 4WD road matters as much as the hike',
     ],
@@ -372,11 +372,11 @@ export const HIKES: Hike[] = [
     wilderness: null,
     dogs: 'prohibited',
     permits:
-      'Trail register required at the trailhead. Park entrance fee applies -- check current fees with NPS.',
+      'Trail register required at the trailhead. Park entrance fee applies. Check current fees with NPS.',
     parking: {
       spaces: null,
       notes: 'Chapin Mesa museum area parking.',
-      fee: 'Park entrance fee applies -- amount not verified here, see NPS fees page.',
+      fee: 'Park entrance fee applies; amount not verified here, see NPS fees page.',
       finalApproach: 'any_vehicle',
       sources: ['nps_meve', 'nps_meve_fees'],
       lastChecked: CHECKED,

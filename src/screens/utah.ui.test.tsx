@@ -90,11 +90,11 @@ describe('home and region navigation', () => {
 
   it('goes Home -> Utah via the switch, and back to Colorado', async () => {
     await mountAt('#/')
-    await click(buttonByText(/^🏜️Utah/))
+    await click(buttonByText(/^Utah/))
     expect(location.hash).toBe('#/region/utah')
     expect(container.querySelector('h1')?.textContent).toContain('Utah')
-    expect(buttonByText(/^🏜️Utah/)?.getAttribute('aria-pressed')).toBe('true')
-    await click(buttonByText(/^🏔️Colorado/))
+    expect(buttonByText(/^Utah/)?.getAttribute('aria-pressed')).toBe('true')
+    await click(buttonByText(/^Colorado/))
     expect(location.hash).toBe('#/')
     expect(text()).toContain('What are we')
   })
@@ -121,7 +121,7 @@ describe('Utah region page', () => {
     expect(cards).toHaveLength(UTAH_DESTINATIONS.length)
     expect(cards[0].textContent).toContain('Moab')
     expect(cards[0].className).toContain('dest-card--flagship')
-    expect(cards[0].textContent).toContain('🟢 → 🔴')
+    expect(cards[0].textContent).toContain('Beginner–Advanced')
     expect(cards[0].textContent).toContain('Bronco Off-Roadeo')
     for (const d of UTAH_DESTINATIONS) expect(text()).toContain(d.name)
   })
@@ -260,13 +260,13 @@ describe('vehicle is a profile setting, not a Bronco hard-code', () => {
 
   it('links Bronco owners to the Bronco tab, and nobody else', async () => {
     await mountAt('#/dest/moab')
-    await click(buttonByText('🚙 Bronco tab'))
+    await click(buttonByText('Bronco tab'))
     expect(location.hash).toBe('#/bronco')
     localStorage.setItem('raytire.v1.profile', JSON.stringify({ rig: { name: 'Jeep Wrangler', rigClass: 'four_wd' } }))
     act(() => root.unmount())
     container.remove()
     await mountAt('#/dest/moab')
-    expect(buttonByText('🚙 Bronco tab')).toBeUndefined()
+    expect(buttonByText('Bronco tab')).toBeUndefined()
   })
 })
 

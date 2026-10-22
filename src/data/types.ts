@@ -504,7 +504,6 @@ export interface Destination extends Sourced {
   name: string
   /** Where it is, the way a person would say it. */
   area: string
-  emoji: string
   flagship: boolean
   tagline: string
   why: string
@@ -532,7 +531,6 @@ export interface Region {
   id: string
   name: string
   state: string
-  emoji: string
   tagline: string
   /** The home region is the existing Durango planner. */
   home: boolean
@@ -575,7 +573,6 @@ export type GoatModeId =
 export interface GoatMode extends Sourced {
   id: GoatModeId
   name: string
-  glyph: string
   /** Which trims actually get this mode -- G.O.A.T. Modes are trim-dependent. */
   standardOn: string
   whatItDoes: string
@@ -586,7 +583,6 @@ export interface GoatMode extends Sourced {
 
 export interface CheatSheetEntry {
   id: string
-  glyph: string
   title: string
   guidance: string
   note?: string
