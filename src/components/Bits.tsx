@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import type { Measure, Warning } from '../data/types'
+import type { Measure, TrailRating, Warning } from '../data/types'
 import { formatMeasure } from '../engine/measure'
 import { sourcesFor } from '../data/sources'
 
@@ -23,6 +23,11 @@ export function Stat({
       <div className="stat__label">{label}</div>
     </div>
   )
+}
+
+/** The rating colour as a plain dot; the label next to it says what it means. */
+export function RatingDot({ rating }: { rating: TrailRating }) {
+  return <span className={`rating-dot rating-dot--${rating}`} aria-hidden="true" />
 }
 
 export function BigStat({ label, value }: { label: string; value: string }) {

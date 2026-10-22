@@ -62,20 +62,17 @@ export function DestinationScreen({ id, go }: { id: string; go: (path: string) =
       </button>
 
       <header className={`dest-hero dest-hero--${destination.id}`}>
-        <span className="dest-hero__emoji" aria-hidden="true">
-          {destination.emoji}
-        </span>
         {destination.flagship && <div className="eyebrow dest-card__flag">Flagship</div>}
         <h1 className="display">{destination.name}</h1>
         <p className="muted" style={{ margin: '4px 0 10px' }}>
-          📍 {destination.area}
+          {destination.area}
         </p>
         <div className="chips">
           <span className="chip chip--depth">{formatDifficultyRange(range)}</span>
           <span className="chip">{formatSeasonMonths(destination.season)}</span>
           {drive && (
             <span className="chip">
-              🚙 {formatDurationRange(drive.minutes)} from Durango
+              {formatDurationRange(drive.minutes)} from Durango
             </span>
           )}
         </div>
@@ -90,7 +87,7 @@ export function DestinationScreen({ id, go }: { id: string; go: (path: string) =
       <div className="chips">
         {destination.terrain.map((f) => (
           <span key={f} className="chip">
-            {FEATURE_META[f].emoji} {FEATURE_META[f].label}
+            {FEATURE_META[f].label}
           </span>
         ))}
         {destination.styles.map((s) => (
@@ -102,7 +99,7 @@ export function DestinationScreen({ id, go }: { id: string; go: (path: string) =
 
       {school ? (
         <>
-          <SectionTitle>🐎 {school.name} → next adventure</SectionTitle>
+          <SectionTitle>{school.name} → next adventure</SectionTitle>
           <div className="card school">
             <h2 className="headline">You learned the basics.</h2>
             <p className="muted" style={{ margin: '6px 0 10px' }}>
@@ -166,7 +163,7 @@ export function DestinationScreen({ id, go }: { id: string; go: (path: string) =
           </button>
           {/bronco/i.test(rig.name) ? (
             <button type="button" className="btn btn--ghost" onClick={() => go('bronco')}>
-              🚙 Bronco tab
+              Bronco tab
             </button>
           ) : (
             <span />
@@ -355,7 +352,7 @@ function DriveCard({ destination }: { destination: Destination }) {
         </>
       ) : (
         <p className="tiny" style={{ color: 'var(--caution)', marginTop: 0 }}>
-          Drive from Durango: UNKNOWN. No sourced figure — use your maps app.
+          Drive from Durango: UNKNOWN. No sourced figure, so use your maps app.
         </p>
       )}
       <a

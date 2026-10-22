@@ -36,7 +36,7 @@ export function buildMemo(
     {
       heading: 'Entry cost',
       body: [
-        `${formatDuration(itinerary.driveMinutes)} behind the wheel${itinerary.unmeasuredLegs > 0 ? ' (floor — some legs unmeasured)' : ''}.`,
+        `${formatDuration(itinerary.driveMinutes)} behind the wheel${itinerary.unmeasuredLegs > 0 ? ' (floor: some legs unmeasured)' : ''}.`,
         `${formatMeasure(itinerary.driveMiles, 'mi', { decimals: 0 })} on the odometer.`,
         `Road calls for: ${VEHICLE_LABEL[itinerary.vehicle]}.`,
       ],
@@ -68,7 +68,7 @@ export function buildMemo(
   if (upside.length > 0) {
     lines.push({
       heading: 'Optional upside',
-      body: upside.map((s) => `${s.name} — ${s.blurb}`),
+      body: upside.map((s) => `${s.name}: ${s.blurb}`),
     })
   }
 
@@ -85,7 +85,7 @@ export function buildMemo(
   lines.push({
     heading: 'Post-close',
     body: food
-      ? [`${food.name}, ${food.town}.`, food.hoursNote ?? 'Hours not verified — call ahead.']
+      ? [`${food.name}, ${food.town}.`, food.hoursNote ?? 'Hours not verified. Call ahead.']
       : ['No food or beer leg on this plan.'],
   })
 

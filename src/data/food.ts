@@ -67,12 +67,12 @@ export const FOOD: FoodStop[] = [
     url: 'https://carverbrewing.com/',
     phone: null,
     hoursNote:
-      'Reported Mon-Wed 11am-9pm, Thu-Sat 11am-10pm, Sun 11am-9pm (checked 2026-09-18). Confirm before you count on it. Carver also does breakfast -- useful on the way out, not just back.',
+      'Reported Mon-Wed 11am-9pm, Thu-Sat 11am-10pm, Sun 11am-9pm (checked 2026-09-18). Confirm before you count on it. Carver also does breakfast, useful on the way out, not just back.',
     status: 'active',
     seasonal: false,
     closureReason: null,
     reopeningDate: null,
-    notes: 'Marked its 40th year operating in 2026 -- a long-running Durango fixture, not a new or shaky listing.',
+    notes: 'Marked its 40th year operating in 2026: a long-running Durango fixture, not a new or shaky listing.',
     lat: 37.274,
     lon: -107.8805,
     sources: ['carver', 'visit_durango'],
@@ -155,7 +155,7 @@ export const FOOD: FoodStop[] = [
     closureReason: 'Reported permanently closed on 2025-03-30; owners sold the business.',
     reopeningDate: null,
     notes:
-      'The Greene St space reopened under new ownership as "Alpine Tavern," a different business -- not a reopening of Avalanche, and not added here as a recommendation.',
+      'The Greene St space reopened under new ownership as "Alpine Tavern," a different business, not a reopening of Avalanche, and not added here as a recommendation.',
     lat: 37.8119,
     lon: -107.6645,
     sources: ['wikipedia', 'durango_herald'],

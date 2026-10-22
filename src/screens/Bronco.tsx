@@ -47,11 +47,11 @@ export function Bronco({ go }: { go: (path: string) => void }) {
       <div className="chips" style={{ marginBottom: 10 }}>
         <span className="chip chip--truck">Sasquatch Package</span>
       </div>
-      <h1 className="display">🚙 Your Bronco</h1>
+      <h1 className="display">Your Bronco</h1>
       <p className="tiny faint" style={{ marginBottom: 18 }}>
         Not an owner's manual. What you actually need to know before pointing
         it at a forest road. Figures below are Ford's own published numbers
-        for the Sasquatch Package on the current-generation Bronco — where a
+        for the Sasquatch Package on the current-generation Bronco. Where a
         figure depends on body style, trim or engine, that is called out
         rather than flattened into one number. This truck's own door placard
         and build sheet always win over anything printed here.
@@ -89,7 +89,7 @@ export function Bronco({ go }: { go: (path: string) => void }) {
 
       <SectionTitle>G.O.A.T. Modes</SectionTitle>
       <p className="tiny faint" style={{ marginTop: -6, marginBottom: 12 }}>
-        Which of these are actually on this truck depends on trim — check the
+        Which of these are actually on this truck depends on trim, so check the
         mode dial in the cluster. Nothing below is invented; it is what Ford
         documents each mode doing.
       </p>
@@ -97,9 +97,6 @@ export function Bronco({ go }: { go: (path: string) => void }) {
         <details key={mode.id} className="card card--flat">
           <summary>
             <span>
-              <span aria-hidden="true" style={{ marginRight: 8 }}>
-                {mode.glyph}
-              </span>
               {mode.name}
             </span>
           </summary>
@@ -115,14 +112,11 @@ export function Bronco({ go }: { go: (path: string) => void }) {
       <SectionTitle>Off-road cheat sheet</SectionTitle>
       <p className="tiny faint" style={{ marginTop: -6, marginBottom: 12 }}>
         Quick reference, not a driving textbook. Having the Sasquatch package
-        does not mean a route is currently passable — check conditions.
+        does not mean a route is currently passable. Check conditions.
       </p>
       {CHEAT_SHEET.map((entry) => (
         <div key={entry.id} className="card card--flat">
           <h3 style={{ fontSize: 15, fontWeight: 700, margin: 0 }}>
-            <span aria-hidden="true" style={{ marginRight: 8 }}>
-              {entry.glyph}
-            </span>
             {entry.title}
           </h3>
           <p className="tiny muted" style={{ margin: '6px 0 0' }}>{entry.guidance}</p>
@@ -143,7 +137,7 @@ export function Bronco({ go }: { go: (path: string) => void }) {
         <Field label="Repair kit" value={TIRE_INFO.repairKitNote} />
         <p className="tiny" style={{ color: 'var(--caution)' }}>
           Always air back up toward placard pressure before extended pavement
-          travel — an aired-down tire run fast on the highway wears and heats
+          travel: an aired-down tire run fast on the highway wears and heats
           unevenly.
         </p>
         <SourceLine ids={TIRE_INFO.sources} lastChecked={TIRE_INFO.lastChecked} />
@@ -156,7 +150,7 @@ export function Bronco({ go }: { go: (path: string) => void }) {
           {BRONCO_FACTORY_RECOVERY.map((item) => (
             <li key={item.id}>
               {item.label}
-              {item.note && <span className="faint"> — {item.note}</span>}
+              {item.note && <span className="faint"> ({item.note})</span>}
             </li>
           ))}
         </ul>
@@ -168,7 +162,7 @@ export function Bronco({ go }: { go: (path: string) => void }) {
           Recommended personal / recovery gear
         </div>
         <p className="tiny faint" style={{ margin: '4px 0 6px' }}>
-          Not factory equipment — a personal kit to carry, our call rather
+          Not factory equipment: a personal kit to carry, our call rather
           than a Ford spec.
         </p>
         <ul className="tiny muted" style={{ paddingLeft: 18 }}>
@@ -224,7 +218,7 @@ export function Bronco({ go }: { go: (path: string) => void }) {
       </div>
 
       <p className="tiny faint" style={{ marginTop: 18 }}>
-        Every route in this app links back here for a Bronco check — vehicle
+        Every route in this app links back here for a Bronco check: vehicle
         capability and current road conditions are two different questions,
         and this app never answers the second one for you.
       </p>

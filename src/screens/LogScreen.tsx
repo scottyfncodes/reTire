@@ -63,15 +63,15 @@ export function LogScreen({ go }: { go: (path: string) => void }) {
 
           <div className="stats">
             <div className="stat">
-              <div className="stat__value num">{entry.driveMiles ?? '—'}</div>
+              <div className="stat__value num">{entry.driveMiles ?? '–'}</div>
               <div className="stat__label">Drive mi</div>
             </div>
             <div className="stat">
-              <div className="stat__value num">{entry.hikeMiles ?? '—'}</div>
+              <div className="stat__value num">{entry.hikeMiles ?? '–'}</div>
               <div className="stat__label">Hike mi</div>
             </div>
             <div className="stat">
-              <div className="stat__value num">{entry.gainFt ?? '—'}</div>
+              <div className="stat__value num">{entry.gainFt ?? '–'}</div>
               <div className="stat__label">Gain ft</div>
             </div>
           </div>

@@ -20,7 +20,7 @@ export const CAMPS: Camp[] = [
     elevationFt: 9800,
     access: 'any_vehicle',
     rooftopTentNotes:
-      'Reached by graded gravel (FR 585); sites are vehicle-accessible, which suits a rooftop tent. Levelness varies site to site -- not verified.',
+      'Reached by graded gravel (FR 585); sites are vehicle-accessible, which suits a rooftop tent. Levelness varies site to site, not verified.',
     water: null,
     season: {
       months: [6, 7, 8, 9],
@@ -30,7 +30,7 @@ export const CAMPS: Camp[] = [
       lastChecked: CHECKED,
     },
     restrictions: [
-      'All sites first-come, first-served -- no reservations taken',
+      'All sites first-come, first-served: no reservations taken',
       'One of the busiest campgrounds in the forest; arriving late on a summer weekend is a gamble',
     ],
     lat: 37.8072,
@@ -79,7 +79,7 @@ export const CAMPS: Camp[] = [
     water: null,
     season: {
       months: [6, 7, 8, 9],
-      note: 'Season not verified here -- check with San Juan NF.',
+      note: 'Season not verified here. Check with San Juan NF.',
       confidence: 'unknown',
       sources: ['sjnf'],
       lastChecked: CHECKED,
@@ -101,7 +101,7 @@ export const CAMPS: Camp[] = [
     elevationFt: 7500,
     access: 'any_vehicle',
     rooftopTentNotes:
-      'Five miles from town at the Colorado Trail terminus -- the shortest possible "we slept out" night.',
+      'Five miles from town at the Colorado Trail terminus: the shortest possible "we slept out" night.',
     water: null,
     season: {
       months: [5, 6, 7, 8, 9],
@@ -137,7 +137,7 @@ export const CAMPS: Camp[] = [
       lastChecked: CHECKED,
     },
     restrictions: [
-      'Dispersed camping rules, stay limits and designated-site requirements change -- read the signs at the road junction, they are the authority',
+      'Dispersed camping rules, stay limits and designated-site requirements change: read the signs at the road junction, they are the authority',
       'Fire restrictions change through the season; check before you strike a match',
     ],
     lat: 37.8095,
@@ -157,7 +157,7 @@ export const CAMPS: Camp[] = [
     access: 'high_clearance',
     rooftopTentNotes:
       'Pullouts along the canyon below the 4WD-only split. The closer to Kennebec you push, the more the road matters.',
-    water: 'La Plata River. Historic mining district upstream -- treat, and think about it.',
+    water: 'La Plata River. Historic mining district upstream: treat, and think about it.',
     season: {
       months: [6, 7, 8, 9, 10],
       note: 'Lower canyon opens earlier than the upper road to Kennebec Pass.',
@@ -166,7 +166,7 @@ export const CAMPS: Camp[] = [
       lastChecked: CHECKED,
     },
     restrictions: [
-      'Mixed private and public land in the canyon -- private parcels are real and posted',
+      'Mixed private and public land in the canyon: private parcels are real and posted',
       'Read the signs at the pullout; designated-dispersed rules apply in places',
     ],
     lat: 37.3862,
@@ -185,17 +185,17 @@ export const CAMPS: Camp[] = [
     elevationFt: 10900,
     access: 'any_vehicle',
     rooftopTentNotes:
-      'High, open and exposed at about 10,900 ft -- superb stars, genuinely cold nights, and wind is the variable that ruins it.',
+      'High, open and exposed at about 10,900 ft: superb stars, genuinely cold nights, and wind is the variable that ruins it.',
     water: null,
     season: {
       months: [7, 8, 9],
-      note: 'Short high-country season. Camping rules here have changed over the years -- verify current status with San Juan NF.',
+      note: 'Short high-country season. Camping rules here have changed over the years. Verify current status with San Juan NF.',
       confidence: 'unknown',
       sources: ['sjnf'],
       lastChecked: CHECKED,
     },
     restrictions: [
-      'Camping status and stay limits near Molas Pass have been adjusted in recent years -- do not assume, check',
+      'Camping status and stay limits near Molas Pass have been adjusted in recent years: do not assume, check',
     ],
     lat: 37.7444,
     lon: -107.7203,

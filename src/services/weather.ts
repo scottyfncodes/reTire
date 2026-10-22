@@ -191,7 +191,7 @@ export function weatherNotes(day: DailyWeather | null, elevationFt: number | nul
     notes.push(`gusts to ${Math.round(day.gustMaxMph)} mph`)
   }
   if (day.code !== null && day.code >= 95) {
-    notes.push('Thunderstorms forecast — be off the high ground early')
+    notes.push('Thunderstorms forecast: be off the high ground early')
   }
   if (elevationFt !== null && elevationFt >= 11000) {
     notes.push(`Forecast is elevation-corrected to ${elevationFt.toLocaleString()} ft`)

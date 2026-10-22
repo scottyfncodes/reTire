@@ -251,7 +251,7 @@ export function Detail({
         </div>
       )}
 
-      <SectionTitle>🚙 Bronco check</SectionTitle>
+      <SectionTitle>Bronco check</SectionTitle>
       <BroncoCheck adventure={adventure} itinerary={itinerary} go={go} />
 
       <SectionTitle>Weather at the destination</SectionTitle>
@@ -450,7 +450,7 @@ export function Detail({
               {food.address ? ` · ${food.address}` : ''}
             </p>
             <p className="tiny" style={{ color: 'var(--caution)' }}>
-              {food.hoursNote ?? 'Hours not verified.'} Hours change constantly —
+              {food.hoursNote ?? 'Hours not verified.'} Hours change constantly:
               this app does not treat them as fact.
             </p>
             <div className="chips">
@@ -475,7 +475,7 @@ export function Detail({
         <div className="eyebrow">Navigation to the trailhead</div>
         <p className="tiny muted" style={{ margin: '4px 0 10px' }}>
           Hands off to your maps app for the drive to{' '}
-          {adventure.anchor.label}. Coordinates are approximate — sanity-check
+          {adventure.anchor.label}. Coordinates are approximate, so sanity-check
           them against the route before you rely on them.
         </p>
         <a
@@ -495,7 +495,7 @@ export function Detail({
         <div className="eyebrow">Trail / backcountry route</div>
         <p className="tiny muted" style={{ margin: '4px 0 0' }}>
           Not provided here, and not something to rely on a phone for. Most of
-          this country has no cell service — carry a downloaded offline map or
+          this country has no cell service. Carry a downloaded offline map or
           paper, and treat the drive-to-trailhead link above as the limit of
           what this app navigates.
         </p>
@@ -585,7 +585,7 @@ function BroncoCheck({
         label="Bronco Sasquatch capability vs. stated requirement"
         value={
           ctx.meetsStatedRequirement === null
-            ? 'UNKNOWN — the route requirement itself is not established'
+            ? 'UNKNOWN: the route requirement itself is not established'
             : ctx.meetsStatedRequirement
               ? 'Meets or exceeds the stated requirement'
               : 'Falls short of the stated requirement'
@@ -607,7 +607,7 @@ function BroncoCheck({
         <span className="warn__mark">!</span>
         <span>
           Vehicle suitability: VERIFY. A capable vehicle does not make a
-          closed, washed-out or snowed-in road passable — check current
+          closed, washed-out or snowed-in road passable. Check current
           conditions before you go. Vehicle capability and current road
           condition are different questions.
         </span>
@@ -765,7 +765,7 @@ function dogLabel(policy: string): string {
     case 'prohibited':
       return 'Not allowed'
     default:
-      return 'UNKNOWN — check with the land manager'
+      return 'UNKNOWN: check with the land manager'
   }
 }
 

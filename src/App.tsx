@@ -11,14 +11,15 @@ import { RegionScreen } from './screens/Region'
 import { DestinationScreen } from './screens/Destination'
 import { Bronco } from './screens/Bronco'
 import { useStore } from './state/store'
+import { TabIcon } from './components/TabIcon'
 
 const TABS = [
-  { path: '', glyph: '🏔️', label: 'Today', match: ['home', 'mode', 'adventure', 'region', 'destination'] },
-  { path: 'bronco', glyph: '🚙', label: 'Bronco', match: ['bronco'] },
-  { path: 'builder', glyph: '🗺️', label: 'Build', match: ['builder'] },
-  { path: 'trips', glyph: '📌', label: 'Saved', match: ['trips', 'trip'] },
-  { path: 'log', glyph: '📓', label: 'Log', match: ['log'] },
-  { path: 'profile', glyph: '⚙️', label: 'Profile', match: ['profile'] },
+  { path: '', icon: 'today', label: 'Today', match: ['home', 'mode', 'adventure', 'region', 'destination'] },
+  { path: 'bronco', icon: 'bronco', label: 'Bronco', match: ['bronco'] },
+  { path: 'builder', icon: 'builder', label: 'Build', match: ['builder'] },
+  { path: 'trips', icon: 'trips', label: 'Saved', match: ['trips', 'trip'] },
+  { path: 'log', icon: 'log', label: 'Log', match: ['log'] },
+  { path: 'profile', icon: 'profile', label: 'Profile', match: ['profile'] },
 ]
 
 function Screens() {
@@ -79,9 +80,7 @@ function Screens() {
             aria-current={tab.match.includes(route.name)}
             onClick={() => go(tab.path)}
           >
-            <span className="tabbar__glyph" aria-hidden="true">
-              {tab.glyph}
-            </span>
+            <TabIcon name={tab.icon} />
             {tab.label}
           </button>
         ))}

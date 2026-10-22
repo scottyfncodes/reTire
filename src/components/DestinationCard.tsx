@@ -35,13 +35,10 @@ export function DestinationCard({
         <div className="eyebrow dest-card__flag">Flagship · Start with this one</div>
       )}
       <div className="dest-card__head">
-        <span className="dest-card__emoji" aria-hidden="true">
-          {destination.emoji}
-        </span>
         <div>
           <h3 className="headline">{destination.name}</h3>
           <p className="tiny faint" style={{ margin: '2px 0 0' }}>
-            📍 {destination.area}
+            {destination.area}
           </p>
         </div>
       </div>
@@ -74,7 +71,7 @@ export function DestinationCard({
           <span className="chip chip--truck">Starts at {RIG_SHORT[easiestRig]}</span>
         )}
         {destination.skillsSchool && (
-          <span className="chip chip--depth">🐎 {destination.skillsSchool.name}</span>
+          <span className="chip chip--depth">{destination.skillsSchool.name}</span>
         )}
       </div>
     </button>

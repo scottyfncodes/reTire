@@ -40,24 +40,24 @@ describe('difficultyRange', () => {
   it('spans easiest to hardest rated route', () => {
     const r = difficultyRange([route('advanced'), route('beginner'), route('intermediate')])
     expect(r).toEqual({ low: 'beginner', high: 'advanced', rated: 3, unrated: 0 })
-    expect(formatDifficultyRange(r)).toBe('🟢 → 🔴')
+    expect(formatDifficultyRange(r)).toBe('Beginner–Advanced')
   })
 
   it('counts unrated routes instead of guessing them', () => {
     const r = difficultyRange([route('beginner'), route('unknown', 'four_wd', 'u1')])
     expect(r.unrated).toBe(1)
-    expect(formatDifficultyRange(r)).toBe('🟢 +1 ⚪')
+    expect(formatDifficultyRange(r)).toBe('Beginner +1 not rated')
   })
 
   it('says Not rated when nothing is rated', () => {
     const r = difficultyRange([route('unknown')])
     expect(r.low).toBeNull()
-    expect(formatDifficultyRange(r)).toBe('⚪ Not rated')
-    expect(formatDifficultyRange(difficultyRange([]))).toBe('⚪ Not rated')
+    expect(formatDifficultyRange(r)).toBe('Not rated')
+    expect(formatDifficultyRange(difficultyRange([]))).toBe('Not rated')
   })
 
-  it('shows Moab as the full 🟢 → 🔴 spread', () => {
-    expect(formatDifficultyRange(difficultyRange(DESTINATIONS_BY_ID.moab.routes))).toBe('🟢 → 🔴')
+  it('shows Moab as the full Beginner–Advanced spread', () => {
+    expect(formatDifficultyRange(difficultyRange(DESTINATIONS_BY_ID.moab.routes))).toBe('Beginner–Advanced')
   })
 })
 
@@ -141,9 +141,9 @@ describe('rigVerdict', () => {
 
 describe('labels', () => {
   it('uses the three-colour scale plus an explicit Not rated', () => {
-    expect(RATING_META.beginner.dot).toBe('🟢')
-    expect(RATING_META.intermediate.dot).toBe('🟡')
-    expect(RATING_META.advanced.dot).toBe('🔴')
+    expect(RATING_META.beginner.label).toBe('Beginner')
+    expect(RATING_META.intermediate.label).toBe('Intermediate')
+    expect(RATING_META.advanced.label).toBe('Advanced')
     expect(RATING_META.unknown.label).toBe('Not rated')
   })
 

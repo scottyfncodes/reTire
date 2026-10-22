@@ -59,7 +59,7 @@ export function ProfileScreen({ go }: { go: (path: string) => void }) {
       <h1 className="display">Experience profile</h1>
       <p className="tiny faint" style={{ marginBottom: 18 }}>
         These shape what gets recommended and what gets flagged. They never
-        change the route's real numbers — those are shown either way, and the
+        change the route's real numbers. Those are shown either way, and the
         call is yours.
       </p>
 
@@ -86,7 +86,7 @@ export function ProfileScreen({ go }: { go: (path: string) => void }) {
 
       <SectionTitle>Walking</SectionTitle>
 
-      <Field label={`Flat-ground pace — ${profile.paceMph} mph`}>
+      <Field label={`Flat-ground pace: ${profile.paceMph} mph`}>
         <input
           type="range"
           min="1.4"
@@ -102,7 +102,7 @@ export function ProfileScreen({ go }: { go: (path: string) => void }) {
       </p>
 
       <Field
-        label={`Elevation-gain ceiling — ${profile.maxGainFt.toLocaleString()} ft`}
+        label={`Elevation-gain ceiling: ${profile.maxGainFt.toLocaleString()} ft`}
       >
         <input
           type="range"
@@ -115,7 +115,7 @@ export function ProfileScreen({ go }: { go: (path: string) => void }) {
       </Field>
 
       <Field
-        label={`High-point ceiling — ${profile.maxElevationFt.toLocaleString()} ft`}
+        label={`High-point ceiling: ${profile.maxElevationFt.toLocaleString()} ft`}
       >
         <input
           type="range"
@@ -128,7 +128,7 @@ export function ProfileScreen({ go }: { go: (path: string) => void }) {
       </Field>
 
       <Field
-        label={`Preferred hike length — ${profile.hikeMiles.min}–${profile.hikeMiles.max} mi`}
+        label={`Preferred hike length: ${profile.hikeMiles.min}–${profile.hikeMiles.max} mi`}
       >
         <input
           type="range"
@@ -149,7 +149,7 @@ export function ProfileScreen({ go }: { go: (path: string) => void }) {
 
       <SectionTitle>Driving</SectionTitle>
       <Field
-        label={`Maximum one-way drive — ${Math.round(profile.maxDriveMinutes / 60)}h ${profile.maxDriveMinutes % 60}m`}
+        label={`Maximum one-way drive: ${Math.round(profile.maxDriveMinutes / 60)}h ${profile.maxDriveMinutes % 60}m`}
       >
         <input
           type="range"
@@ -238,7 +238,7 @@ export function ProfileScreen({ go }: { go: (path: string) => void }) {
 
       <p className="tiny faint" style={{ marginTop: 20 }}>
         Nothing here is inferred from anything you have done before. Having
-        climbed a big mountain does not mean you want every hard route — the
+        climbed a big mountain does not mean you want every hard route. The
         app shows the objective requirements and lets you pick.
       </p>
     </div>

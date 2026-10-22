@@ -56,7 +56,7 @@ export function Results({
       </button>
 
       <h1 className="display" style={{ marginBottom: 4 }}>
-        {meta ? `${meta.emoji} ${meta.label}` : "🎲 Dealer's choice"}
+        {meta ? meta.label : "Dealer's choice"}
       </h1>
       <p className="tiny faint" style={{ marginBottom: 16 }}>
         {meta
@@ -107,7 +107,7 @@ export function Results({
 
       <p className="tiny faint">
         Routes outside their usual season are kept in the list and labelled
-        rather than hidden — the date is a fact you can overrule, not something
+        rather than hidden: the date is a fact you can overrule, not something
         the app should decide for you.
       </p>
     </div>

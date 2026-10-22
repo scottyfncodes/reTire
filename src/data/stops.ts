@@ -9,7 +9,7 @@ export const STOPS: Stop[] = [
     kind: 'ghost_town',
     dwellMinutes: 45,
     blurb:
-      'One of the highest mining camps in North America, founded 1875 and empty by the 1920s. Seven buildings have been stabilised by the BLM and the San Juan County Historical Society -- new roofs, windows, doors and drainage, so what you walk through is standing on purpose.',
+      'One of the highest mining camps in North America, founded 1875 and empty by the 1920s. Seven buildings have been stabilised by the BLM and the San Juan County Historical Society: new roofs, windows, doors and drainage, so what you walk through is standing on purpose.',
     lat: 37.9294,
     lon: -107.5717,
     elevationFt: { min: 11185, max: 11200 },
@@ -48,7 +48,7 @@ export const STOPS: Stop[] = [
     kind: 'overlook',
     dwellMinutes: 20,
     blurb:
-      'About 11,800 ft on a shelf road above the Upper Ophir valley. Loose rock, steep grades and a narrow shelf on the Ophir side -- the exposure, not the traction, is the story.',
+      'About 11,800 ft on a shelf road above the Upper Ophir valley. Loose rock, steep grades and a narrow shelf on the Ophir side: the exposure, not the traction, is the story.',
     lat: 37.8514,
     lon: -107.7897,
     elevationFt: 11800,
@@ -74,7 +74,7 @@ export const STOPS: Stop[] = [
     kind: 'town',
     dwellMinutes: 45,
     blurb:
-      'A 9,300 ft mining town at the head of the Animas, and the hinge every San Juan route turns on. Note: Avalanche Brewing, the long-standing brewpub here, is reported permanently closed -- do not plan the beer stop around it.',
+      'A 9,300 ft mining town at the head of the Animas, and the hinge every San Juan route turns on. Note: Avalanche Brewing, the long-standing brewpub here, is reported permanently closed: do not plan the beer stop around it.',
     lat: 37.8119,
     lon: -107.6645,
     elevationFt: 9318,
@@ -87,7 +87,7 @@ export const STOPS: Stop[] = [
     kind: 'mine',
     dwellMinutes: 30,
     blurb:
-      'The oxidised red slopes and surviving headframes between Silverton and Ouray on US 550 -- among the most photographed industrial ruins in Colorado, visible from the highway.',
+      'The oxidised red slopes and surviving headframes between Silverton and Ouray on US 550, among the most photographed industrial ruins in Colorado, visible from the highway.',
     lat: 37.8969,
     lon: -107.7117,
     elevationFt: 11018,
@@ -109,11 +109,11 @@ export const STOPS: Stop[] = [
   },
   {
     id: 'mesa_verde_chapin',
-    name: 'Mesa Verde -- Chapin Mesa',
+    name: 'Mesa Verde: Chapin Mesa',
     kind: 'historic',
     dwellMinutes: 180,
     blurb:
-      'Cliff dwellings, the museum and the mesa-top loops. The drive in from the entrance is long and slow by design -- budget for it.',
+      'Cliff dwellings, the museum and the mesa-top loops. The drive in from the entrance is long and slow by design: budget for it.',
     lat: 37.1836,
     lon: -108.4879,
     elevationFt: 6900,
@@ -139,7 +139,7 @@ export const STOPS: Stop[] = [
     kind: 'scenic',
     dwellMinutes: null,
     blurb:
-      'The original pre-1950s highway alignment between Durango and Silverton -- rough, rocky, narrow, and a far better drive than the pavement it was replaced by.',
+      'The original pre-1950s highway alignment between Durango and Silverton: rough, rocky, narrow, and a far better drive than the pavement it was replaced by.',
     lat: 37.6425,
     lon: -107.7856,
     elevationFt: 9200,
@@ -152,7 +152,7 @@ export const STOPS: Stop[] = [
     kind: 'mine',
     dwellMinutes: 30,
     blurb:
-      'Scattered mill and mine remains up the canyon toward Kennebec. Mixed private and public ground -- look from the road, the posting is real.',
+      'Scattered mill and mine remains up the canyon toward Kennebec. Mixed private and public ground: look from the road, the posting is real.',
     lat: 37.3862,
     lon: -108.0503,
     elevationFt: 9000,

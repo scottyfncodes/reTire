@@ -16,25 +16,21 @@ import type {
 
 export const RATING_META: Record<
   TrailRating,
-  { dot: string; label: string; blurb: string }
+  { label: string; blurb: string }
 > = {
   beginner: {
-    dot: '🟢',
     label: 'Beginner',
     blurb: 'Graded or gentle terrain in good conditions. Still backcountry.',
   },
   intermediate: {
-    dot: '🟡',
     label: 'Intermediate',
     blurb: 'Real 4WD: steeper rock, sand or exposure. Low range and some experience.',
   },
   advanced: {
-    dot: '🔴',
     label: 'Advanced',
     blurb: 'Technical. Built rigs, a spotter and recovery gear.',
   },
   unknown: {
-    dot: '⚪',
     label: 'Not rated',
     blurb: 'Nobody credible publishes a rating, so the app will not invent one.',
   },
@@ -62,13 +58,13 @@ export function difficultyRange(routes: OffroadRoute[]): DifficultyRange {
   }
 }
 
-/** "🟢 → 🔴", "🟢", or "⚪ Not rated" for a card. */
+/** "Beginner–Advanced", "Beginner", or "Not rated" for a card. */
 export function formatDifficultyRange(range: DifficultyRange): string {
-  if (range.low === null || range.high === null) return `${RATING_META.unknown.dot} Not rated`
-  const low = RATING_META[range.low].dot
-  const high = RATING_META[range.high].dot
-  const body = range.low === range.high ? low : `${low} → ${high}`
-  return range.unrated > 0 ? `${body} +${range.unrated} ${RATING_META.unknown.dot}` : body
+  if (range.low === null || range.high === null) return RATING_META.unknown.label
+  const low = RATING_META[range.low].label
+  const high = RATING_META[range.high].label
+  const body = range.low === range.high ? low : `${low}–${high}`
+  return range.unrated > 0 ? `${body} +${range.unrated} not rated` : body
 }
 
 /* --------------------------------------------------------- the ladder */
@@ -194,7 +190,7 @@ export function rigVerdict(rig: RigProfile, route: OffroadRoute): RigVerdict {
         : ''
     return {
       fit: 'meets',
-      message: `The ${name} meets the minimum vehicle class listed. That is not the same as safe -- conditions and the driver decide the rest.${driver}`,
+      message: `The ${name} meets the minimum vehicle class listed. That is not the same as safe: conditions and the driver decide the rest.${driver}`,
     }
   }
   return {
@@ -205,24 +201,24 @@ export function rigVerdict(rig: RigProfile, route: OffroadRoute): RigVerdict {
 
 /* ---------------------------------------------------------- features */
 
-export const FEATURE_META: Record<RouteFeature, { emoji: string; label: string }> = {
-  slickrock: { emoji: '🪨', label: 'Slickrock' },
-  sand: { emoji: '🏜️', label: 'Sand' },
-  rock_crawling: { emoji: '🧗', label: 'Rock crawling' },
-  steep_climbs: { emoji: '⛰️', label: 'Steep climbs' },
-  water_crossings: { emoji: '💧', label: 'Water crossings' },
-  narrow_ledges: { emoji: '⚠️', label: 'Narrow ledges' },
-  shelf_road: { emoji: '🛣️', label: 'Shelf road' },
-  graded_gravel: { emoji: '🛤️', label: 'Graded gravel' },
-  mud_when_wet: { emoji: '🌧️', label: 'Impassable when wet' },
-  high_clearance: { emoji: '📏', label: 'High clearance' },
-  four_wd: { emoji: '⚙️', label: '4WD' },
-  recovery_gear: { emoji: '🪝', label: 'Recovery gear' },
-  whip_flag: { emoji: '🚩', label: 'Whip flag' },
-  width_limits: { emoji: '↔️', label: 'Width limits' },
-  remote: { emoji: '📵', label: 'Remote' },
-  permit: { emoji: '🎫', label: 'Permit' },
-  forest: { emoji: '🌲', label: 'Forest' },
+export const FEATURE_META: Record<RouteFeature, { label: string }> = {
+  slickrock: { label: 'Slickrock' },
+  sand: { label: 'Sand' },
+  rock_crawling: { label: 'Rock crawling' },
+  steep_climbs: { label: 'Steep climbs' },
+  water_crossings: { label: 'Water crossings' },
+  narrow_ledges: { label: 'Narrow ledges' },
+  shelf_road: { label: 'Shelf road' },
+  graded_gravel: { label: 'Graded gravel' },
+  mud_when_wet: { label: 'Impassable when wet' },
+  high_clearance: { label: 'High clearance' },
+  four_wd: { label: '4WD' },
+  recovery_gear: { label: 'Recovery gear' },
+  whip_flag: { label: 'Whip flag' },
+  width_limits: { label: 'Width limits' },
+  remote: { label: 'Remote' },
+  permit: { label: 'Permit' },
+  forest: { label: 'Forest' },
 }
 
 export const STYLE_LABEL: Record<AdventureStyle, string> = {
@@ -247,7 +243,7 @@ export function terrainLine(dest: Destination, max = 3): string {
  * the region page rather than sprinkled through every card.
  */
 export const GLOSSARY: Array<{ term: string; meaning: string }> = [
-  { term: 'Slickrock', meaning: 'Bare sandstone. Grippy when dry -- tires climb angles that look impossible -- and slick when wet.' },
+  { term: 'Slickrock', meaning: 'Bare sandstone. Grippy when dry (tires climb angles that look impossible) and slick when wet.' },
   { term: 'Low range', meaning: 'The 4WD gearing for crawling slowly under control, up and especially down.' },
   { term: 'Airing down', meaning: 'Letting tire pressure out for grip on rock and float on sand. Bring a compressor to air back up.' },
   { term: 'Lockers', meaning: 'Differentials that make both wheels on an axle turn together, so one lifted tire does not stop you.' },
