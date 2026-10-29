@@ -9,6 +9,8 @@ import {
 import { formatMeasure } from '../engine/measure'
 import { formatSeasonMonths } from '../engine/season'
 import { formatDurationRange } from '../engine/itinerary'
+import { Landscape } from './Landscape'
+import { sceneForDestination } from './scenes'
 
 /** At-a-glance card for a destination: where, what, how hard, how far, when. */
 export function DestinationCard({
@@ -27,10 +29,11 @@ export function DestinationCard({
   return (
     <button
       type="button"
-      className={destination.flagship ? 'card card--tap dest-card dest-card--flagship' : 'card card--tap dest-card'}
+      className={`card card--tap card--scenic dest-card${destination.flagship ? ' dest-card--flagship' : ''}`}
       onClick={onOpen}
       aria-label={`${destination.name}: open destination`}
     >
+      <Landscape scene={sceneForDestination(destination)} align="middle" className="card__art" />
       {destination.flagship && (
         <div className="eyebrow dest-card__flag">Flagship · Start with this one</div>
       )}

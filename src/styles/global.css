@@ -1,36 +1,39 @@
-/* RayTire -- modern Colorado adventure journal, dark and earthy, phone first. */
+/* RayTire -- adventure planning from Durango. Phone first, dark, legible in sun. */
 
 :root {
-  /* Night in the San Juans: warm blacks, not blue-grey SaaS greys. */
-  --ink-900: #0e0c0a;
-  --ink-800: #16130f;
-  --ink-700: #1e1a15;
-  --ink-600: #2a241d;
-  --ink-500: #3a322a;
-  --ink-400: #4d4338;
+  /* Dusk over the ridgeline: cool blacks under a trail-orange brand. */
+  --ink-900: #0b0e11;
+  --ink-800: #101418;
+  --ink-700: #151a1f;
+  --ink-650: #1c2228;
+  --ink-600: #222a31;
+  --ink-500: #2c353d;
+  --ink-400: #3d4852;
 
-  --bone: #f6f1e7;
-  --bone-dim: #cfc5b5;
-  --bone-faint: #948a7c;
+  --bone: #eef2f4;
+  --bone-dim: #b6c0c7;
+  --bone-faint: #7f8b94;
 
-  /* Bronco orange, alpine ice, lichen. */
-  --ember: #e3762c;
-  --ember-soft: #f0a468;
-  --ice: #77b0cc;
-  --lichen: #97ad76;
+  /* Trail orange, with sandstone second. Ice and lichen are status only. */
+  --ember: #fb923c;
+  --ember-soft: #fdba74;
+  --ember-ink: #2a1203;
+  --ice: #7dd3fc;
+  --lichen: #4ade80;
 
-  --caution: #e7b04a;
-  --blocker: #dd6148;
+  --caution: #f4b942;
+  --blocker: #f26d6d;
 
-  --radius: 16px;
-  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-sm: 12px;
   --gutter: 16px;
   --max-width: 720px;
-
-  --shadow: 0 10px 30px rgb(0 0 0 / 45%);
+  --tap: 48px;
 
   --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui,
     'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont,
+    system-ui, 'Segoe UI', Roboto, sans-serif;
 
   color-scheme: dark;
 }
@@ -58,12 +61,13 @@ body {
 }
 
 body::before {
-  /* Last light over the ridgeline: a straight horizon band, not a glow orb. */
+  /* Topographic contours under a straight horizon band, kept very quiet. */
   content: '';
   position: fixed;
-  inset: 0 0 auto;
-  height: 320px;
-  background: linear-gradient(180deg, rgb(227 118 44 / 9%), transparent);
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(251 146 60 / 8%), transparent 320px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.025' stroke-width='1'%3E%3Cpath d='M-20 60 C40 20 90 100 150 60 S250 40 270 70'/%3E%3Cpath d='M-20 90 C40 50 90 130 150 90 S250 70 270 100'/%3E%3Cpath d='M-20 150 C50 120 100 190 160 150 S250 130 270 160'/%3E%3Cpath d='M-20 185 C50 155 100 225 160 185 S250 165 270 195'/%3E%3C/g%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
 }
@@ -76,7 +80,8 @@ body::before {
 .shell {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--gutter) calc(88px + env(safe-area-inset-bottom));
+  padding: calc(env(safe-area-inset-top) + 8px) var(--gutter)
+    calc(96px + env(safe-area-inset-bottom));
 }
 
 h1,
@@ -84,7 +89,8 @@ h2,
 h3 {
   margin: 0;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.12;
+  font-family: var(--font-display);
 }
 
 p {
@@ -92,13 +98,19 @@ p {
 }
 
 a {
-  color: var(--ember-soft);
+  color: var(--ember);
+  text-underline-offset: 3px;
 }
 
 button {
   font: inherit;
   color: inherit;
   cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 2px;
 }
 
 .num {
@@ -110,21 +122,19 @@ button {
 .eyebrow {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--bone-faint);
 }
 
 .display {
-  font-size: clamp(30px, 9vw, 44px);
+  font-size: clamp(28px, 8vw, 40px);
   font-weight: 800;
-  letter-spacing: -0.035em;
 }
 
 .headline {
-  font-size: clamp(22px, 6vw, 28px);
+  font-size: 19px;
   font-weight: 750;
-  letter-spacing: -0.03em;
 }
 
 .muted {
@@ -136,20 +146,33 @@ button {
 }
 
 .tiny {
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.4;
 }
 
 /* ------------------------------------------------------------------- head */
 
 .masthead {
-  padding: calc(18px + env(safe-area-inset-top)) 0 10px;
+  padding: 10px 0 6px;
 }
 
 .wordmark {
-  font-size: 30px;
-  font-weight: 800;
-  letter-spacing: -0.045em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wordmark__mark {
+  width: 34px;
+  height: 34px;
+  flex: none;
+}
+
+.wordmark__text {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
 }
 
 .wordmark em {
@@ -161,16 +184,18 @@ button {
   color: var(--bone-faint);
   font-size: 13px;
   margin-top: 2px;
+  letter-spacing: 0.02em;
 }
 
 /* ------------------------------------------------------------------ cards */
 
 .card {
-  background: linear-gradient(180deg, var(--ink-700), var(--ink-800));
+  background: var(--ink-700);
   border: 1px solid var(--ink-600);
   border-radius: var(--radius);
   padding: 16px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  color: inherit;
 }
 
 .card--flat {
@@ -186,15 +211,114 @@ button {
 }
 
 .card--tap:active {
-  transform: scale(0.988);
+  transform: scale(0.99);
   border-color: var(--ink-500);
+}
+
+.card--brand {
+  border-color: rgb(251 146 60 / 45%);
+  background: linear-gradient(160deg, rgb(251 146 60 / 12%), var(--ink-700) 60%);
+}
+
+/* A strip of the place's country across the top of a card. */
+.card--scenic {
+  overflow: hidden;
+  padding-top: 0;
+}
+
+.card__art {
+  display: block;
+  width: calc(100% + 32px);
+  height: 96px;
+  margin: 0 -16px 12px;
+}
+
+/* The landscape is the frame; the line sits in its sky. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  margin: 14px 0;
+  border-radius: 22px;
+  border: 1px solid rgb(251 146 60 / 30%);
+  background: var(--ink-700);
+}
+
+.hero__art {
+  display: block;
+  width: 100%;
+  height: 256px;
+}
+
+.hero__copy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 20px 18px;
+  font-size: clamp(27px, 7.4vw, 36px);
+  font-weight: 850;
+  text-shadow: 0 1px 14px rgb(0 0 0 / 40%);
+}
+
+.hero__accent {
+  display: block;
+  color: var(--ember);
+}
+
+.hero__sub {
+  margin: 0;
+  padding: 14px 18px 16px;
+  font-size: 15px;
+  color: var(--bone-dim);
+}
+
+/* Detail headers: the place's country above the title. */
+.place-art {
+  display: block;
+  width: 100%;
+  height: 132px;
+  margin: 4px 0 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--ink-600);
+}
+
+/* Landscapes come alive at rest: one Bronco crawling along the road. */
+.scene__rig {
+  animation: scene-drive 30s linear -10s infinite;
+}
+
+.scene__dust {
+  transform-box: fill-box;
+  transform-origin: right center;
+  animation: scene-dust 0.8s ease-in-out infinite alternate;
+}
+
+.scene__wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: scene-wheel 0.9s linear infinite;
+}
+
+@keyframes scene-drive {
+  from { transform: translateX(-50px); }
+  to { transform: translateX(450px); }
+}
+
+@keyframes scene-dust {
+  from { opacity: 0.55; transform: scaleX(0.8); }
+  to { opacity: 1; transform: scaleX(1.15); }
+}
+
+@keyframes scene-wheel {
+  to { transform: rotate(360deg); }
 }
 
 /* ------------------------------------------------------------ mode picker */
 
 .mode-grid {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   grid-template-columns: 1fr;
 }
 
@@ -208,35 +332,36 @@ button {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 16px;
-  border-radius: var(--radius);
+  min-height: 68px;
+  padding: 12px 16px;
+  border-radius: 14px;
   border: 1px solid var(--ink-600);
-  background: linear-gradient(135deg, var(--ink-700), var(--ink-800) 70%);
+  background: var(--ink-700);
   width: 100%;
   text-align: left;
   transition: transform 0.12s ease, border-color 0.12s ease;
 }
 
 .mode:active {
-  transform: scale(0.985);
+  transform: scale(0.99);
   border-color: var(--ember);
 }
 
 
 .mode__label {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 750;
   letter-spacing: 0.01em;
 }
 
 .mode__blurb {
-  font-size: 12.5px;
+  font-size: 13.5px;
   color: var(--bone-faint);
 }
 
 .mode--wild {
-  background: linear-gradient(135deg, rgb(227 118 44 / 22%), var(--ink-800) 70%);
-  border-color: rgb(227 118 44 / 40%);
+  background: linear-gradient(160deg, rgb(233 196 106 / 10%), var(--ink-700) 60%);
+  border-color: rgb(233 196 106 / 40%);
 }
 
 /* ------------------------------------------------------------- stat strip */
@@ -253,9 +378,8 @@ button {
 }
 
 .stat__value {
-  font-size: 19px;
-  font-weight: 750;
-  letter-spacing: -0.02em;
+  font-size: 18px;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
@@ -267,8 +391,9 @@ button {
 }
 
 .stat__label {
-  font-size: 10.5px;
-  letter-spacing: 0.13em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--bone-faint);
 }
@@ -282,15 +407,16 @@ button {
 }
 
 .bigstat__value {
-  font-size: clamp(22px, 7vw, 30px);
+  font-size: clamp(20px, 5.6vw, 26px);
   font-weight: 800;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
 }
 
 .bigstat__label {
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--bone-faint);
   margin-top: 4px;
@@ -317,74 +443,98 @@ button {
 }
 
 .chip {
-  font-size: 11.5px;
-  font-weight: 650;
-  letter-spacing: 0.04em;
-  padding: 4px 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 11px;
   border-radius: 999px;
   border: 1px solid var(--ink-500);
-  background: var(--ink-700);
+  background: var(--ink-650);
   color: var(--bone-dim);
   white-space: nowrap;
 }
 
 .chip--depth {
-  border-color: var(--ember);
-  color: var(--ember-soft);
-  background: rgb(227 118 44 / 12%);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  border-color: rgb(251 146 60 / 50%);
+  color: var(--bone);
+  background: rgb(251 146 60 / 14%);
 }
 
 .chip--truck {
-  border-color: rgb(151 173 118 / 45%);
-  color: var(--lichen);
+  border-color: rgb(233 196 106 / 45%);
+  color: var(--sand);
+  background: rgb(233 196 106 / 12%);
 }
 
 .chip--unknown {
-  border-color: rgb(231 176 74 / 45%);
+  border-color: rgb(244 185 66 / 45%);
   color: var(--caution);
 }
 
 .chip--closed {
-  border-color: rgb(221 97 72 / 45%);
+  border-color: rgb(242 109 109 / 45%);
   color: var(--blocker);
 }
 
 /* --------------------------------------------------------------- warnings */
 
 .warn {
-  display: flex;
+  display: grid;
+  grid-template-columns: 22px 1fr;
   gap: 10px;
   padding: 10px 12px;
   border-radius: var(--radius-sm);
   margin-bottom: 8px;
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.4;
   border: 1px solid;
 }
 
 .warn--info {
-  border-color: rgb(119 176 204 / 30%);
-  background: rgb(119 176 204 / 8%);
+  border-color: rgb(125 211 252 / 30%);
+  background: var(--ink-800);
   color: var(--bone-dim);
 }
 
+.warn--info .warn__mark {
+  background: rgb(125 211 252 / 14%);
+  color: var(--ice);
+}
+
 .warn--caution {
-  border-color: rgb(231 176 74 / 38%);
-  background: rgb(231 176 74 / 9%);
-  color: #f0d79b;
+  border-color: rgb(244 185 66 / 38%);
+  background: var(--ink-800);
+  color: var(--bone-dim);
+}
+
+.warn--caution .warn__mark {
+  background: rgb(244 185 66 / 20%);
+  color: var(--caution);
 }
 
 .warn--blocker {
-  border-color: rgb(221 97 72 / 45%);
-  background: rgb(221 97 72 / 11%);
-  color: #f3b5a6;
+  border-color: rgb(242 109 109 / 45%);
+  background: var(--ink-800);
+  color: var(--bone-dim);
+}
+
+.warn--blocker .warn__mark {
+  background: rgb(242 109 109 / 20%);
+  color: var(--blocker);
 }
 
 .warn__mark {
-  font-weight: 800;
-  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  background: rgb(255 255 255 / 8%);
 }
 
 /* -------------------------------------------------------------- timeline */
@@ -426,25 +576,23 @@ button {
 }
 
 .tl--hike .tl__dot {
-  background: var(--lichen);
   border-color: var(--lichen);
 }
 
 .tl--drive .tl__dot {
-  background: var(--ember);
-  border-color: var(--ember);
+  border-color: var(--sand);
 }
 
-.tl--food .tl__dot {
-  background: var(--ice);
+.tl--food .tl__dot,
+.tl--stop .tl__dot {
   border-color: var(--ice);
 }
 
 .tl--camp .tl__dot,
 .tl--arrive .tl__dot,
 .tl--depart .tl__dot {
-  background: var(--bone);
-  border-color: var(--bone);
+  background: var(--ember);
+  border-color: var(--ember);
 }
 
 .tl__time {
@@ -454,9 +602,9 @@ button {
   width: 52px;
   text-align: right;
   font-size: 12.5px;
-  font-weight: 700;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-  color: var(--bone-dim);
+  color: var(--bone-faint);
 }
 
 .tl__title {
@@ -466,8 +614,8 @@ button {
 }
 
 .tl__detail {
-  font-size: 12.5px;
-  color: var(--bone-faint);
+  font-size: 13.5px;
+  color: var(--bone-dim);
   margin-top: 2px;
 }
 
@@ -479,13 +627,13 @@ button {
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 14px 18px;
-  border-radius: var(--radius-sm);
+  min-height: var(--tap);
+  padding: 12px 16px;
+  border-radius: 14px;
   border: 1px solid var(--ink-500);
-  background: var(--ink-700);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.01em;
+  background: var(--ink-650);
+  font-weight: 750;
+  font-size: 16px;
   transition: transform 0.1s ease;
 }
 
@@ -494,9 +642,9 @@ button {
 }
 
 .btn--primary {
-  background: linear-gradient(180deg, var(--ember), #c85f1d);
-  border-color: #c85f1d;
-  color: #1b1109;
+  background: var(--ember);
+  border-color: var(--ember);
+  color: var(--ember-ink);
 }
 
 .btn--ghost {
@@ -515,9 +663,9 @@ button {
 }
 
 .field__label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--bone-faint);
   margin-bottom: 7px;
@@ -532,19 +680,20 @@ button {
 
 .seg__btn {
   flex: 1 1 auto;
-  min-width: 68px;
-  padding: 9px 10px;
+  min-width: 60px;
+  min-height: 44px;
+  padding: 8px 10px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--ink-500);
   background: var(--ink-800);
   color: var(--bone-dim);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 650;
   text-align: center;
 }
 
 .seg__btn[aria-pressed='true'] {
-  background: rgb(227 118 44 / 18%);
+  background: rgb(251 146 60 / 14%);
   border-color: var(--ember);
   color: var(--bone);
 }
@@ -554,12 +703,14 @@ input[type='text'],
 textarea,
 select {
   width: 100%;
-  padding: 11px 12px;
+  min-height: var(--tap);
+  padding: 11px 13px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--ink-500);
   background: var(--ink-800);
   color: var(--bone);
   font: inherit;
+  font-size: 16px; /* 16px stops iOS zoom */
 }
 
 textarea {
@@ -582,12 +733,12 @@ input[type='range'] {
 }
 
 .section-title {
-  font-size: 12px;
-  font-weight: 750;
-  letter-spacing: 0.16em;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--bone-faint);
-  margin: 22px 0 10px;
+  color: var(--bone-dim);
+  margin: 28px 0 10px;
 }
 
 .checklist {
@@ -606,10 +757,10 @@ input[type='range'] {
 }
 
 .checklist input {
-  margin-top: 3px;
-  width: 18px;
-  height: 18px;
-  accent-color: var(--lichen);
+  margin-top: 0;
+  width: 22px;
+  height: 22px;
+  accent-color: var(--ember);
   flex: none;
 }
 
@@ -625,10 +776,10 @@ input[type='range'] {
 
 .memo__heading {
   font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 0.18em;
+  font-weight: 800;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ember-soft);
+  color: var(--ember);
   margin-top: 16px;
 }
 
@@ -644,9 +795,7 @@ input[type='range'] {
 }
 
 .source a {
-  color: var(--ice);
-  text-decoration: none;
-  border-bottom: 1px dotted rgb(119 176 204 / 40%);
+  color: var(--bone-dim);
 }
 
 /* -------------------------------------------------------------- disclosure */
@@ -696,24 +845,26 @@ details.card--flat > summary + * {
   bottom: 0;
   z-index: 20;
   display: flex;
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
   background: var(--ink-900);
   border-top: 1px solid var(--ink-600);
-  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .tabbar__btn {
   flex: 1;
   background: none;
   border: 0;
-  padding: 10px 4px 9px;
+  min-height: 52px;
+  padding: 4px 2px;
+  border-radius: 12px;
   color: var(--bone-faint);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 3px;
 }
 
@@ -729,22 +880,24 @@ details.card--flat > summary + * {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-height: 44px;
   background: none;
   border: 0;
-  padding: 14px 0 6px;
-  color: var(--bone-faint);
-  font-size: 13px;
+  padding: 0 4px 0 0;
+  margin: 4px 0 6px;
+  color: var(--bone-dim);
+  font-size: 15px;
   font-weight: 650;
 }
 
 .banner {
   border-radius: var(--radius-sm);
-  padding: 9px 12px;
-  font-size: 12.5px;
-  margin-bottom: 12px;
-  border: 1px solid rgb(231 176 74 / 35%);
-  background: rgb(231 176 74 / 10%);
-  color: #f0d79b;
+  padding: 10px 12px;
+  font-size: 14px;
+  margin: 8px 0 12px;
+  border: 1px solid rgb(244 185 66 / 35%);
+  background: rgb(244 185 66 / 12%);
+  color: var(--caution);
 }
 
 /* ------------------------------------------------------------ regions */
@@ -752,7 +905,7 @@ details.card--flat > summary + * {
 /* Desert red for Utah, drawn from the same warm palette as the ember. */
 :root {
   --slickrock: #c8553d;
-  --sand: #e2b77d;
+  --sand: #e9c46a;
 }
 
 .region-switch {
@@ -781,7 +934,7 @@ details.card--flat > summary + * {
 
 .region-switch__btn[aria-pressed='true'] {
   border-color: var(--ember);
-  background: linear-gradient(135deg, rgb(227 118 44 / 18%), var(--ink-800) 75%);
+  background: linear-gradient(135deg, rgb(251 146 60 / 18%), var(--ink-800) 75%);
 }
 
 
@@ -811,8 +964,7 @@ details.card--flat > summary + * {
 }
 
 .dest-card--flagship {
-  border-color: rgb(200 85 61 / 55%);
-  background: linear-gradient(160deg, rgb(200 85 61 / 20%), var(--ink-800) 65%);
+  border-color: rgb(251 146 60 / 45%);
 }
 
 .dest-card__flag {
@@ -835,11 +987,7 @@ details.card--flat > summary + * {
 
 .dest-hero {
   position: relative;
-  margin: 4px calc(var(--gutter) * -1) 0;
-  padding: 26px var(--gutter) 18px;
-  background: linear-gradient(170deg, rgb(200 85 61 / 35%), var(--ink-900) 80%);
-  border-bottom: 1px solid var(--ink-600);
-  overflow: hidden;
+  margin: 4px 0 0;
 }
 
 
@@ -958,8 +1106,8 @@ details.card--flat > summary + * {
 }
 
 .school {
-  border-color: rgb(227 118 44 / 45%);
-  background: linear-gradient(160deg, rgb(227 118 44 / 16%), var(--ink-800) 70%);
+  border-color: rgb(251 146 60 / 45%);
+  background: linear-gradient(160deg, rgb(251 146 60 / 16%), var(--ink-800) 70%);
 }
 
 .glossary__summary {
@@ -1008,8 +1156,42 @@ details.card--flat > summary + * {
   font-size: 14.5px;
 }
 
+@media (min-width: 600px) {
+  .hero__art {
+    height: 380px;
+  }
+
+  .hero__copy {
+    right: 16%;
+    padding: 28px 26px;
+    font-size: 32px;
+  }
+
+  .hero__sub {
+    padding: 16px 26px 18px;
+  }
+
+  .card__art {
+    height: 112px;
+  }
+
+  .place-art {
+    height: 180px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
+  }
+
+  .scene__rig {
+    animation: none;
+    transform: translateX(150px);
+  }
+
+  .scene__dust,
+  .scene__wheel {
+    animation: none;
   }
 }

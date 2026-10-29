@@ -4,6 +4,8 @@ import { VEHICLE_LABEL } from '../engine/drive'
 import { formatMeasure } from '../engine/measure'
 import { formatClock, formatDuration } from '../engine/time'
 import { FOOD_BY_ID } from '../data/food'
+import { Landscape } from './Landscape'
+import { sceneFor } from './scenes'
 
 export function AdventureCard({
   adventure,
@@ -23,7 +25,8 @@ export function AdventureCard({
     itinerary.vehicle === 'four_wd' || itinerary.vehicle === 'four_wd_low_range'
 
   return (
-    <button type="button" className="card card--tap" onClick={onOpen}>
+    <button type="button" className="card card--tap card--scenic" onClick={onOpen}>
+      <Landscape scene={sceneFor(adventure)} align="middle" className="card__art" />
       <div className="chips" style={{ marginBottom: 8 }}>
         <span className="chip chip--depth">{DEPTH_LABEL[itinerary.depth]}</span>
         {truck && <span className="chip chip--truck">{VEHICLE_LABEL[itinerary.vehicle]}</span>}

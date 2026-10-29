@@ -16,6 +16,7 @@ import {
 import type { BroncoMeasure } from '../data/types'
 import { formatMeasure } from '../engine/measure'
 import { SectionTitle, SourceLine } from '../components/Bits'
+import { Landscape } from '../components/Landscape'
 import { readJson, writeJson } from '../services/storage'
 
 export function Bronco({ go }: { go: (path: string) => void }) {
@@ -43,6 +44,8 @@ export function Bronco({ go }: { go: (path: string) => void }) {
       <button type="button" className="backlink" onClick={() => go('')}>
         ← Home
       </button>
+
+      <Landscape scene="alpine" rig className="place-art" />
 
       <div className="chips" style={{ marginBottom: 10 }}>
         <span className="chip chip--truck">Sasquatch Package</span>

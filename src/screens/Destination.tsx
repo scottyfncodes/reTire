@@ -20,6 +20,8 @@ import { useStore } from '../state/store'
 import { useWeather } from '../state/useWeather'
 import { WeatherPanel } from '../components/WeatherPanel'
 import { RouteCard } from '../components/RouteCard'
+import { Landscape } from '../components/Landscape'
+import { sceneForDestination } from '../components/scenes'
 import { navigateUrl, SectionTitle, SourceLine } from '../components/Bits'
 
 export function DestinationScreen({ id, go }: { id: string; go: (path: string) => void }) {
@@ -62,6 +64,7 @@ export function DestinationScreen({ id, go }: { id: string; go: (path: string) =
       </button>
 
       <header className={`dest-hero dest-hero--${destination.id}`}>
+        <Landscape scene={sceneForDestination(destination)} align="middle" className="place-art" />
         {destination.flagship && <div className="eyebrow dest-card__flag">Flagship</div>}
         <h1 className="display">{destination.name}</h1>
         <p className="muted" style={{ margin: '4px 0 10px' }}>

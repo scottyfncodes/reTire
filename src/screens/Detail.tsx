@@ -22,6 +22,8 @@ import { Timeline } from '../components/Timeline'
 import { Memo } from '../components/Memo'
 import { GearChecklist } from '../components/GearChecklist'
 import { QuickControls } from './Results'
+import { Landscape } from '../components/Landscape'
+import { sceneFor } from '../components/scenes'
 import {
   navigateUrl,
   SectionTitle,
@@ -148,6 +150,8 @@ export function Detail({
       <button type="button" className="backlink" onClick={() => go('')}>
         ← Home
       </button>
+
+      <Landscape scene={sceneFor(adventure)} align="middle" className="place-art" />
 
       <div className="chips" style={{ marginBottom: 10 }}>
         <span className="chip chip--depth">{DEPTH_LABEL[itinerary.depth]}</span>
