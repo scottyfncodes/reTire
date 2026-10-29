@@ -8,7 +8,7 @@
  * to its own stored forecast and label it as stale.
  */
 
-const VERSION = 'raytire-v1'
+const VERSION = 'raytire-v2'
 const SHELL = `${VERSION}-shell`
 const ASSETS = `${VERSION}-assets`
 

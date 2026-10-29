@@ -6,6 +6,7 @@ import { useStore } from '../state/store'
 import { RegionSwitch } from '../components/RegionSwitch'
 import { DestinationCard } from '../components/DestinationCard'
 import { RatingDot, SectionTitle } from '../components/Bits'
+import { Landscape } from '../components/Landscape'
 
 const SCALE: TrailRating[] = ['beginner', 'intermediate', 'advanced', 'unknown']
 
@@ -36,12 +37,11 @@ export function RegionScreen({ id, go }: { id: string; go: (path: string) => voi
 
       <RegionSwitch current={region.id} go={go} />
 
-      <h1 className="display" style={{ margin: '18px 0 4px' }}>
-        {region.name}
-      </h1>
-      <p className="muted" style={{ marginTop: 6 }}>
-        {region.tagline}
-      </p>
+      <section className="hero" aria-label={region.name}>
+        <Landscape scene="arch" sky={64} rig className="hero__art" />
+        <h1 className="hero__copy">{region.name}</h1>
+        <p className="hero__sub">{region.tagline}</p>
+      </section>
       <p className="tiny faint" style={{ marginBottom: 16 }}>
         Not day trips any more. These are places you drive to and explore
         from. Pick a place, see how hard it gets, and take the {rigName} as far
