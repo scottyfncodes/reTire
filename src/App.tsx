@@ -8,13 +8,14 @@ import { Trips } from './screens/Trips'
 import { LogScreen } from './screens/LogScreen'
 import { ProfileScreen } from './screens/ProfileScreen'
 import { useStore } from './state/store'
+import { IconBook, IconMap, IconPeak, IconPin, IconUser } from './components/Icons'
 
 const TABS = [
-  { path: '', glyph: '🏔️', label: 'Today', match: ['home', 'mode', 'adventure'] },
-  { path: 'builder', glyph: '🗺️', label: 'Build', match: ['builder'] },
-  { path: 'trips', glyph: '📌', label: 'Saved', match: ['trips', 'trip'] },
-  { path: 'log', glyph: '📓', label: 'Log', match: ['log'] },
-  { path: 'profile', glyph: '⚙️', label: 'Profile', match: ['profile'] },
+  { path: '', Icon: IconPeak, label: 'Today', match: ['home', 'mode', 'adventure'] },
+  { path: 'builder', Icon: IconMap, label: 'Build', match: ['builder'] },
+  { path: 'trips', Icon: IconPin, label: 'Saved', match: ['trips', 'trip'] },
+  { path: 'log', Icon: IconBook, label: 'Log', match: ['log'] },
+  { path: 'profile', Icon: IconUser, label: 'Profile', match: ['profile'] },
 ]
 
 function Screens() {
@@ -58,17 +59,15 @@ function Screens() {
     <>
       <main className="shell">{screen}</main>
       <nav className="tabbar" aria-label="Sections">
-        {TABS.map((tab) => (
+        {TABS.map(({ Icon, ...tab }) => (
           <button
             key={tab.path}
             type="button"
             className="tabbar__btn"
-            aria-current={tab.match.includes(route.name)}
+            aria-current={tab.match.includes(route.name) ? 'page' : undefined}
             onClick={() => go(tab.path)}
           >
-            <span className="tabbar__glyph" aria-hidden="true">
-              {tab.glyph}
-            </span>
+            <Icon />
             {tab.label}
           </button>
         ))}

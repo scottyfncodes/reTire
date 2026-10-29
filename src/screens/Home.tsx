@@ -6,6 +6,8 @@ import { useWeather } from '../state/useWeather'
 import { WeatherPanel } from '../components/WeatherPanel'
 import { SectionTitle } from '../components/Bits'
 import { formatClock } from '../engine/time'
+import { Landscape } from '../components/Landscape'
+import { ReTireMark } from '../components/Icons'
 
 const MODE_ORDER: AdventureMode[] = [
   'big_day',
@@ -25,10 +27,15 @@ export function Home({ go }: { go: (path: string) => void }) {
   return (
     <div>
       <header className="masthead">
-        <div className="wordmark">
-          re<em>Tire</em>
+        <div>
+          <div className="wordmark">
+            <ReTireMark className="wordmark__mark" />
+            <span className="wordmark__text">
+              re<em>Tire</em>
+            </span>
+          </div>
+          <div className="tagline">Retirement, with a lot more altitude.</div>
         </div>
-        <div className="tagline">Retirement, with a lot more altitude.</div>
       </header>
 
       {!online && (
@@ -41,9 +48,8 @@ export function Home({ go }: { go: (path: string) => void }) {
       {confirmed && (
         <button
           type="button"
-          className="card card--tap"
+          className="card card--tap card--brand"
           onClick={() => go(`trip/${confirmed.id}`)}
-          style={{ borderColor: 'var(--ember)' }}
         >
           <div className="eyebrow" style={{ color: 'var(--ember)' }}>
             We're doing this
@@ -58,16 +64,17 @@ export function Home({ go }: { go: (path: string) => void }) {
         </button>
       )}
 
-      <h1 className="display" style={{ margin: '20px 0 4px' }}>
-        What are we
-        <br />
-        doing today?
-      </h1>
-      <p className="tiny faint" style={{ marginBottom: 18 }}>
-        {log.length === 0
-          ? 'Your calendar is empty. Your Bronco isn’t.'
-          : `${log.length} adventure${log.length === 1 ? '' : 's'} logged so far. Next.`}
-      </p>
+      <section className="hero" aria-label="Today">
+        <Landscape scene="pass" sky={64} rig className="hero__art" />
+        <h1 className="hero__copy">
+          What are we <span className="hero__accent">doing today?</span>
+        </h1>
+        <p className="hero__sub">
+          {log.length === 0
+            ? 'Your calendar is empty. Your Bronco isn’t.'
+            : `${log.length} adventure${log.length === 1 ? '' : 's'} logged so far. Next.`}
+        </p>
+      </section>
 
       <div className="mode-grid">
         {MODE_ORDER.map((mode) => (

@@ -8,7 +8,7 @@
  * to its own stored forecast and label it as stale.
  */
 
-const VERSION = 'retire-v1'
+const VERSION = 'retire-v2'
 const SHELL = `${VERSION}-shell`
 const ASSETS = `${VERSION}-assets`
 

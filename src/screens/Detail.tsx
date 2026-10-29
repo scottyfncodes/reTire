@@ -17,6 +17,8 @@ import { newTripId, offlineCapability, type SavedTrip } from '../services/trips'
 import { useStore } from '../state/store'
 import { useWeather } from '../state/useWeather'
 import { WeatherPanel } from '../components/WeatherPanel'
+import { Landscape } from '../components/Landscape'
+import { sceneFor } from '../components/scenes'
 import { Timeline } from '../components/Timeline'
 import { Memo } from '../components/Memo'
 import { GearChecklist } from '../components/GearChecklist'
@@ -147,6 +149,8 @@ export function Detail({
       <button type="button" className="backlink" onClick={() => go('')}>
         ← Home
       </button>
+
+      <Landscape scene={sceneFor(adventure)} align="middle" className="place-art" />
 
       <div className="chips" style={{ marginBottom: 10 }}>
         <span className="chip chip--depth">{DEPTH_LABEL[itinerary.depth]}</span>
@@ -445,7 +449,7 @@ export function Detail({
               {food.town}
               {food.address ? ` · ${food.address}` : ''}
             </p>
-            <p className="tiny" style={{ color: 'var(--caution)' }}>
+            <p className="tiny" style={{ color: 'var(--unknown)' }}>
               {food.hoursNote ?? 'Hours not verified.'} Hours change constantly —
               this app does not treat them as fact.
             </p>
@@ -604,7 +608,7 @@ function Line({ label, value }: { label: string; value: string }) {
         {label.toUpperCase()}
       </span>
       <br />
-      <span className={value === 'UNKNOWN' ? '' : 'muted'} style={value === 'UNKNOWN' ? { color: 'var(--caution)' } : undefined}>
+      <span className={value === 'UNKNOWN' ? '' : 'muted'} style={value === 'UNKNOWN' ? { color: 'var(--unknown)' } : undefined}>
         {value}
       </span>
     </p>

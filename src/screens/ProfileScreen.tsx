@@ -176,7 +176,7 @@ export function ProfileScreen({ go }: { go: (path: string) => void }) {
                   ? {
                       borderColor: 'var(--ember)',
                       color: 'var(--ember-soft)',
-                      background: 'rgb(227 118 44 / 12%)',
+                      background: 'var(--brand-soft)',
                     }
                   : undefined
               }
